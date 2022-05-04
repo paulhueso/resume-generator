@@ -7,4 +7,7 @@ router.post('/api/users/', UserController.apiCreateUser);
 router.get('/api/users/id/:id', UserController.apiGetUserById);
 router.get('/api/users/name/:name', UserController.apiGetUserByName);
 
+router.post('/api/login/', UserController.apiLogin);
+
+
 module.exports = router;

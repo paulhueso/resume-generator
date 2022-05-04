@@ -1,6 +1,21 @@
 const User = require("../models/user");
+const bcrypt = require('bcrypt');
+
 
 module.exports = class UserService{
+
+    static async login(data){
+        try {
+            let user = await User.findOne({mail: data.mail});
+            console.log(user);
+            const verified = bcrypt.compareSync(data.password, user.password);
+            console.log(verified);
+            return verified;
+        } catch (error) {
+            console.log(error);
+        } 
+    }
+
     static async getAllUsers(){
         try {
             const allUsers = User.find();
@@ -35,16 +50,11 @@ module.exports = class UserService{
                 'surname' : data.lastname,
                 'address' : data.address,
                 'mail' : data.mail,
-                'password' : data.password,
+                'password' : bcrypt.hashSync(data.password, 10),
                 'tel' : data.phone,
-                'cv_list' : [
-                    {
-                        'experiences' : data.experiences,
-                        'formations' : data.formations
-                    }
-                ]
+                'cv_list' : data.cv_list
             }
-           const response = await new Article(newUser).save();
+           const response = await new User(newUser).save();
            return response;
         } catch (error) {
             console.log(error);

@@ -8,7 +8,7 @@ db.users.insert({
     'surname' : 'Hueso',
     'address' : '5 rue Gustave Crauk',
     'mail' : 'paul.hueso@gmail.com',
-    'password' : '123456',
+    'password' : '$2b$10$bhjCePLtv9EWQByP8adl8edGREqYZ2SL/mZIHTv7IoHXO/NyO5l3G',
     'tel' : "0603861269",
     'cv_list' : [
         {

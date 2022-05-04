@@ -1,6 +1,17 @@
 const UserService = require("../services/UserService");
 
 module.exports = class User{
+
+   static async apiLogin(req, res){
+      try {
+         let verified = await UserService.login(req.body);
+         console.log(verified)
+         verified ? res.status(200).json("Access granted") : res.status(401).json("Unauthorized");
+      } catch (error) {
+         res.status(500).json({error: error})
+      }
+   }
+
    static async apiGetAllUsers(req, res){
       try {
          const users = await UserService.getAllUsers();
@@ -35,8 +46,9 @@ module.exports = class User{
 
    static async apiCreateUser(req, res){
       try {
-         const user = await UserService.createUser();
-         res.json(user);
+         let user = req.body || {};
+         const createdUser = await UserService.createUser(user);
+         res.json(createdUser);
       } catch (error) {
          res.status(500).json({error: error})
       }
