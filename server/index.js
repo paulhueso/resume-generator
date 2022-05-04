@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost:27017/data');
 let db = mongoose.connection;
 
 //routes
-let usersRouter = require('./src/routes/user_route.js');
+let usersRouter = require('./src/routes/user.routes.js');
 
 var app = express();
 
@@ -23,7 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
+
+app.listen(3000, () => console.log(`Hello world app listening on port 3000!`))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

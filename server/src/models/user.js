@@ -25,21 +25,10 @@ let userSchema = mongoose.Schema({
                     'from' : String,
                     'to' : String,
                     'description' : String
-                },
-                {
-                    'school' : String,
-                    'name' : String,
-                    'from' : String,
-                    'to' : String,
-                    'description' : String
                 }
             ]
         }
     ]
 });
 
-let User = module.exports = mongoose.model('User', userSchema);
-
-module.exports.getUserById = function(id, callback){
-    User.findById(id, callback);
-}
+module.exports = User = mongoose.model('User', userSchema);
