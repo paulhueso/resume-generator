@@ -1,11 +1,17 @@
 <template>
-<router-link to="/">Home</router-link> |
+ <div class="app">
+		<router-link to="/">Home</router-link> |
  
 
 <router-view />
-
-
+	</div>
 </template>
+
+<script >
+
+</script>
+
+
 
 
 
@@ -18,13 +24,6 @@
   color: #2c3e50;
   margin-top: 60px;
 }
-a {
-  color:#666;
-  text-decoration: none;
-}
-.router-link-active {
-  font-weight: bold;
-  color:blueviolet;
-}
+
 
 </style>

@@ -37,7 +37,7 @@ export default {
   name: 'App',
   methods: {
     goToProduct3: function () {
-      this.$router.push({ name: 'Product', params: { name: 'Roller' } })
+      this.$router.push({ name: 'Product'})
     },
   }
 }

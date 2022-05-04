@@ -11,7 +11,7 @@ const routes = [
     name: "Home",
     component: Home,
     meta: {
-      title: 'Accueillito'
+      title: 'Login'
     }
   },
   {
@@ -23,9 +23,8 @@ const routes = [
     }
   },
   {
-    path: "/product/:name",
+    path: "/product/",
     name: "Product",
-    props: true,
     component: Product,
     meta: {
       title : 'Produit'
