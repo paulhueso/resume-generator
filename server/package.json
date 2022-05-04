@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/paulhueso/resume-generator#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
-    "mongodb": "^4.5.0"
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.2",
+    "morgan": "^1.10.0"
   }
 }
