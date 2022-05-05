@@ -1,12 +1,11 @@
 <template>
-<Header/>
 <head>
   <meta charset="UTF-8">
   <title>Simple Login Form Example</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="./style.css">
-
 </head>
+
 <body>
+<img src="logo.ico" width="275" height="275">
 <!-- partial:index.partial.html -->
 <div class="login-form">
   <form>
@@ -31,11 +30,8 @@
 </body>
 </template>
 <script>
-import Header from '/src/components/Header.vue'
+
 export default {
-  components: {
-  Header
-  },
   methods: {
     goToRegister: function () {
       this.$router.push({ name: 'Register'})
@@ -57,14 +53,14 @@ export default {
 }
 
 body {
-  background: #77b5fe;
+  background-color: #131313;
   font-family: 'Rubik', sans-serif;
 }
 
 .login-form {
   background: #fff;
   width: 750px;
-  margin: 130px auto;
+  margin: 25px auto;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
