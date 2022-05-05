@@ -12,6 +12,8 @@ db.users.insert({
     'tel' : "0603861269",
     'cv_list' : [
         {
+            'titre': 'Ingé Cybersécurité',
+            'type' : 1, //0 : standard, 1 : ESN
             'experiences' : [
                 {
                     'organization' : 'Unlatch',
@@ -50,6 +52,8 @@ db.users.insert({
     'tel' : "0603861269",
     'cv_list' : [
         {
+            'titre': 'Maçon',
+            'type' : 0, //0 : standard, 1 : ESN
             'experiences' : [
                 {
                     'organization' : 'Unlatch',

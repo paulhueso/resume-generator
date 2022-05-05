@@ -8,7 +8,9 @@ let userSchema = mongoose.Schema({
     'password' : String,
     'tel' : String,
     'cv_list' : [
-        {
+        { 
+            'titre': String,
+            'type' : Boolean, //0 : standard, 1 : ESN
             'experiences' : [
                 {
                     'organization' : String,
@@ -29,6 +31,7 @@ let userSchema = mongoose.Schema({
             ]
         }
     ]
+
 });
 
-module.exports = User = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

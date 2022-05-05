@@ -7,9 +7,7 @@ module.exports = class UserService{
     static async login(data){
         try {
             let user = await User.findOne({mail: data.mail});
-            console.log(user);
             const verified = bcrypt.compareSync(data.password, user.password);
-            console.log(verified);
             return verified;
         } catch (error) {
             console.log(error);
@@ -49,10 +47,10 @@ module.exports = class UserService{
                 'firstname': data.firstname,
                 'surname' : data.lastname,
                 'address' : data.address,
-                'mail' : data.mail,
+                'mail' : data.mail.toLowerCase(),
                 'password' : bcrypt.hashSync(data.password, 10),
                 'tel' : data.phone,
-                'cv_list' : data.cv_list
+                'cv_list' : data.cv_list || []
             }
            const response = await new User(newUser).save();
            return response;
