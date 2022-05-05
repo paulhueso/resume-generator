@@ -1,17 +1,26 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import Home from "@/views/Home.vue";
+import Connection from "@/views/Connection.vue";
+import Register from "@/views/Register.vue";
 import About from "@/views/About.vue";
-import Product from "@/views/Product.vue";
+import Home from "@/views/Home.vue";
 import NotFound from "@/views/NotFound.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "Connection",
+    component: Connection,
     meta: {
-      title: 'Accueillito'
+      title: 'Connexion'
+    }
+  },
+  {
+    path: "/inscription",
+    name: "Register",
+    component: Register,
+    meta: {
+      title: 'Inscription'
     }
   },
   {
@@ -23,12 +32,12 @@ const routes = [
     }
   },
   {
-    path: "/product/:name",
-    name: "Product",
+    path: "/home",
+    name: "Home",
     props: true,
-    component: Product,
+    component: Home,
     meta: {
-      title : 'Produit'
+      title : 'Accueil'
     }
   },
   {
