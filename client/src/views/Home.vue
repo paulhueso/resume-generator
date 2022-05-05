@@ -4,13 +4,8 @@
   <h1>Accueil</h1>
   <p>{{name}}</p>
   <div class="paper">
-<<<<<<< HEAD
-   
-<Lecture/>
-=======
-   <p>Nicolas MARTIN</p>
 
->>>>>>> d479c9d0269e5c4da2bb51f81ab726089677d274
+<Lecture/>
   </div>
 </template>
 <script>
