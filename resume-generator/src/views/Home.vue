@@ -1,4 +1,5 @@
 <template>
+<Header/>
 <head>
   <meta charset="UTF-8">
   <title>Simple Login Form Example</title>
@@ -31,10 +32,14 @@
 </template>
 <script>
 
+ import Header from '/src/components/Header.vue'
 
 
 export default {
   name: 'App',
+  components: {
+  Header
+  },
   methods: {
     goToProduct3: function () {
       this.$router.push({ name: 'Product'})

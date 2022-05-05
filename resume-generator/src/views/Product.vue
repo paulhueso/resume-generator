@@ -1,5 +1,5 @@
 <template>
- 
+ <Header/>
   <Sidebar/>
 
  <div class="paper">
@@ -10,9 +10,11 @@
 </template>
 <script>
  import Sidebar from '/src/components/Sidebar.vue'
+ import Header from '/src/components/Header.vue'
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    Header
   }
 }
   </script>
