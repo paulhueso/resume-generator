@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import Connection from "@/views/Connection.vue";
+import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
@@ -9,8 +9,8 @@ import NotFound from "@/views/NotFound.vue";
 const routes = [
   {
     path: "/",
-    name: "Connection",
-    component: Connection,
+    name: "Login",
+    component: Login,
     meta: {
       title: 'Connexion'
     }
