@@ -1,13 +1,22 @@
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
+let session = require('express-session');
+
 
 
 module.exports = class UserService{
 
-    static async login(data){
+    static async login(req){
         try {
-            let user = await User.findOne({mail: data.mail});
-            const verified = bcrypt.compareSync(data.password, user.password);
+            let user = await User.findOne({mail: req.body.mail});
+            let verified = bcrypt.compareSync(req.body.password, user.password);
+            if(verified){
+                session = req.session;
+                session.userid = user.firstname + user.surname;
+                session.user = user;
+                console.log(session);
+                // User.updateOne({mail: req.body.mail})
+            }
             return verified;
         } catch (error) {
             console.log(error);

@@ -4,8 +4,7 @@ module.exports = class User{
 
    static async apiLogin(req, res){
       try {
-         let verified = await UserService.login(req.body);
-         console.log(verified)
+         let verified = await UserService.login(req);
          verified ? res.status(200).json("Access granted") : res.status(401).json("Unauthorized");
       } catch (error) {
          res.status(500).json({error: error})

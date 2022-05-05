@@ -30,8 +30,8 @@ let userSchema = mongoose.Schema({
                 }
             ]
         }
-    ]
-
+    ],
+    session: any
 });
 
 module.exports = mongoose.model('User', userSchema);
