@@ -1,13 +1,24 @@
 <template>
+  <Header/>
+  <Sidebar/>
   <h1>Accueil</h1>
   <p>{{name}}</p>
   <div class="paper">
-   <p>404 Not Found</p>
-
+   
+<Lecture/>
   </div>
 </template>
 <script>
+ import Lecture from '/src/components/Lecture.vue'
+ import Sidebar from '/src/components/Sidebar.vue'
+ import Header from '/src/components/Header.vue'
+
 export default {
+  components: {
+    Lecture,
+    Sidebar,
+    Header
+  },
   name: 'Accueil',
   props: ['name'],
 }

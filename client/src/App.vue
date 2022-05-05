@@ -1,6 +1,5 @@
 <template>
-<router-link to="/">Connexion</router-link> |
- 
+
 
 <router-view />
 

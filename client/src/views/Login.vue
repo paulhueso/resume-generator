@@ -1,4 +1,5 @@
 <template>
+<Header/>
 <head>
   <meta charset="UTF-8">
   <title>Simple Login Form Example</title>
@@ -30,8 +31,11 @@
 </body>
 </template>
 <script>
-
+import Header from '/src/components/Header.vue'
 export default {
+  components: {
+  Header
+  },
   methods: {
     goToRegister: function () {
       this.$router.push({ name: 'Register'})
