@@ -2,7 +2,7 @@
   <h1>Accueil</h1>
   <p>{{name}}</p>
   <div class="paper">
-   <p>404 Not Found</p>
+   <p>Nicolas MARTIN</p>
 
   </div>
 </template>
@@ -14,6 +14,11 @@ export default {
 </script>
 
 <style scoped>
+
+body {
+  background: #77b5fe;
+  font-family: 'Rubik', sans-serif;
+}
 
 .paper {
 margin-top: 35px;

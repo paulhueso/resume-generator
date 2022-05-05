@@ -28,8 +28,8 @@
       </div>
     </div>
     <div class="action">
-      <button>S'inscrire'</button>
-      <button @click="goToConnexion()">Se connecter</button>
+      <button @click="goToConnection()">S'inscrire'</button>
+      <button @click="goToConnection()">Se connecter</button>
     </div>
   </form>
 </div>
@@ -45,11 +45,12 @@
 export default {
   name: 'Connection',
   methods: {
-    goToConnexion: function () {
-      this.$router.push({ name: 'Connection'})
+    goToConnection: function () {
+      this.$router.push({ name: 'Login'})
     },
   }
 }
+
 </script>
 <style>
 * {
