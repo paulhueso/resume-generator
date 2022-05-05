@@ -1,4 +1,5 @@
 <template>
+<div>
   <Header/>
   <Sidebar/>
   <h1>Accueil</h1>
@@ -6,7 +7,7 @@
   
 
 <Lecture/>
- 
+ </div>
 </template>
 <script>
  import Lecture from '/src/components/Lecture.vue'

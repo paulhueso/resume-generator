@@ -1,195 +1,225 @@
 <template>
-<div>
-<div class="paper">
-<b class="page_title_1">Cv ESN</b>
-<p class="page_1_elm">//////////////////////////////////// DOSSIER TECHNIQUE</p>
-<p class="page_1_name">/////////////////////////// MONSIEUR {{users.firstname}} {{users.surname}} </p>
-<b class="page_1_ent"> {{users.current_organization}}</b>
-<p class="page_1_add">{{users.address}}</p>
-<p class="page_1_tel">Tél: {{users.tel}}</p>
-<p class="page_1_mel">Mail: {{users.mail}}</p>
- </div>
+  <div>
+    <div class="paper">
+      <p class="page_title_1"><b>Cv ESN</b></p>
+      <p class="page_1_elm">
+        //////////////////////////////////// DOSSIER TECHNIQUE
+      </p>
+      <p class="page_1_name">
+        /////////////////////////// MONSIEUR {{ users.firstname }}
+        {{ users.surname }}
+      </p>
+      <p class="page_1_ent">
+        <b> {{ users.current_organization }}</b>
+      </p>
+      <p class="page_1_add">{{ users.address }}</p>
+      <p class="page_1_tel">Tél: {{ users.tel }}</p>
+      <p class="page_1_mel">Mail: {{ users.mail }}</p>
+    </div>
 
-<ul>
+    <ul>
       <li v-for="exp in users.cv_list[0].experiences" :key="exp.organization">
-        
-         <div class="paper"> 
-        
-         <b class="page_title">Experiences</b>
-         <b class="page_2_exp">//////// {{exp.title}}///////////////////////////////////////////////////</b>
-         <p class="page_2_miss">{{exp.from}} - {{exp.to}}| {{users.current_organization}} |{{exp.organization}}</p>
-         <b class="page_2_descp">Description :</b>
-         <b class="page_bottom_1">{{users.current_organization}}</b>
-         <p class="page_bottom_2">{{users.address}} . Tél: {{users.tel}} . DT de Monsieur {{users.firstname}} {{users.surname}}</p>
-         <p class="page_2_desc">{{exp.description}}</p>
-        
-          </div>
-       </li>
-</ul>
+        <div class="paper">
+          <p class="page_title"><b>Experiences</b></p>
+          <p class="page_2_exp">
+            <b>////////{{exp.title}}///////////////////////////////////////////////////</b>
+          </p>
+          <p class="page_2_miss">
+            {{ exp.from }} - {{ exp.to }}| {{ users.current_organization }} |{{
+              exp.organization
+            }}
+          </p>
+          <p class="page_2_descp"><b>Description :</b></p>
+          <p class="page_bottom_1">
+            <b>{{ users.current_organization }}</b>
+          </p>
+          <p class="page_bottom_2">
+            {{ users.address }} . Tél: {{ users.tel }} . DT de Monsieur
+            {{ users.firstname }} {{ users.surname }}
+          </p>
+          <p class="page_2_desc">{{ exp.description }}</p>
+        </div>
+      </li>
+    </ul>
 
-<div class="paper">
-<b class="page_title_2">Formations</b>
-<b class="page_bottom_3">{{users.current_organization}}</b>
-<p class="page_bottom_4">{{users.address}} . Tél: {{users.tel}} . DT de Monsieur {{users.firstname}} {{users.surname}}</p>
-<ul>
-      <li  class="space" v-for="exp in users.cv_list[0].formations" :key="exp.school">
-        
-         <b class="page_3_exp">//////// {{exp.name}}</b>
-         <p class="page_3_place">{{exp.from}} - {{exp.to}}| {{exp.school}} |{{exp.organization}}</p>
-         <p class="page_3_des">Description :</p>
-       
-         <p class="page_3_desc">{{exp.description}}</p>
-         
-        
-          
-       </li>
-       
-</ul>
+    <div class="paper">
+      <p class="page_title_2"><b>Formations</b></p>
+      <p class="page_bottom_3">
+        <b>{{ users.current_organization }}</b>
+      </p>
+      <p class="page_bottom_4">
+        {{ users.address }} . Tél: {{ users.tel }} . DT de Monsieur
+        {{ users.firstname }} {{ users.surname }}
+      </p>
+      <ul>
+        <li
+          class="space"
+          v-for="exp in users.cv_list[0].formations"
+          :key="exp.school"
+        >
+          <p class="page_3_exp">
+            <b>//////// {{ exp.name }}</b>
+          </p>
+          <p class="page_3_place">
+            {{ exp.from }} - {{ exp.to }}| {{ exp.school }} |{{
+              exp.organization
+            }}
+          </p>
+          <b class="page_3_des">Description :</b>
 
-</div>
-
-</div>
+          <p class="page_3_desc">{{ exp.description }}</p>
+        </li>
+		</ul>
+    </div>
+  </div>
 </template>
 
 <style >
 .paper {
-margin-top: 35px;
-margin-left: auto;
-margin-right: auto;
-margin-bottom: 35px;
-height: 1060px;
-width: 750px;
-padding: 35px 20px;
-line-height: 1.5em;
-color: 
-#000000;
-background-color: 
-rgb(255, 255, 255);
-box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+  margin-top: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5%;
+  height: 29.7cm;
+  width: 21cm;
+  padding: 35px 20px;
+  line-height: 1.5em;
+  color: #000000;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
 }
-.page_title_1{
-    
-    text-align: center
+.page_title_1 {
+  text-align: center;
 }
-.page_title{
-    position: relative;
-    
-    left:210px
-    
+.page_title {
+  position: relative;
+
+  text-align: center;
 }
-.page_1_elm{
-position: absolute;
-bottom:-130px;
-left:500px;
+.page_1_elm {
+  position: relative;
+  bottom: -78.5%;
+  left: 9%;
+  text-align: left;
 }
-.page_1_name{
-    position: absolute;
-    bottom: -170px;
-    left:500px;
-    
+.page_1_name {
+  position: relative;
+  bottom: -80%;
+  left: 9%;
+  text-align: left;
 }
-.page_1_ent{
-    position: absolute;
-    bottom: -240px;
-    left:490px;
+.page_1_ent {
+  position: relative;
+  bottom: -81%;
+  left: 11%;
+  text-align: left;
 }
-.page_1_add{
-    position: absolute;
-    bottom: -260px;
-    left:490px;
+.page_1_add {
+  position: relative;
+  bottom: -81%;
+  left: 11%;
+  text-align: left;
 }
-.page_1_tel{
-    position: absolute;
-    bottom: -280px;
-    left:490px;
+.page_1_tel {
+  position: relative;
+  bottom: -81%;
+  left: 11%;
+  text-align: left;
 }
-.page_1_mel{
-    position: absolute;
-    bottom: -300px;
-    left:490px;
+.page_1_mel {
+  position: relative;
+  bottom: -81%;
+  left: 11%;
+  text-align: left;
 }
 
-.page_2_exp{
-    position: relative;
-    top: 100px;
-    right:100px;
+.page_2_exp {
+  position: relative;
+  top: 8%;
+  left: 10%;
+  text-align: left;
 }
 
-.page_2_miss{
-    position: relative;
-    top: 110px;
-    right:100px;
+.page_2_miss {
+  position: relative;
+  top: 10%;
+  left: 10%;
+  text-align: left;
 }
-.page_2_descp{
-     position: relative;
-    top: 180px;
-    right:170px;
+.page_2_descp {
+  position: relative;
+  top: 15%;
+  left:10%;
+  text-align: left;
 }
-.page_2_desc{
-    position: relative;
-    top: 200px;
-    right:10px;
+.page_2_desc {
+  position: relative;
+  top: 11%;
+  left:3%;
+  text-align: left;
+  
 }
-.page_bottom_1{
-   position: relative;
-   top:900px;
-   right:80px; 
+.page_bottom_1 {
+  position: relative;
+  top: 88%;
+  text-align: center;
 }
-.page_bottom_2{
-   position: relative;
-   top:910px;
-    
+.page_bottom_2 {
+  position: relative;
+  top: 88%;
+  text-align: center;
 }
-.page_bottom_3{
-   position: relative;
-   top:955px;
-   right:80px; 
+.page_bottom_3 {
+  position: relative;
+  top: 96%;
+
+  text-align: center;
 }
-.page_bottom_4{
-   position: relative;
-   top:960px;
-    
+.page_bottom_4 {
+  position: relative;
+  top: 96%;
+  text-align: center;
 }
-.page_title_2{
-    position: relative;
-    left:40px
-    
+.page_title_2 {
+  position: relative;
+  text-align: center;
 }
-.page_3_exp{
-    position: relative;
-    top: 10px;
-    right:210px;
+.page_3_exp {
+  position: relative;
+  top: auto;
+  left: 10%;
+  text-align: left;
 }
-.page_3_place{
-    position: relative;
-    top: 20px;
-    right:100px;
+.page_3_place {
+  position: relative;
+  top: auto;
+  left: 15%;
+  text-align: left;
 }
-.page_3_des{
-    position: relative;
-    top: 40px;
-    right:220px;
+.page_3_des {
+  position: relative;
+  top: auto;
+  right: 30%;
 }
-.page_3_desc{
-    position: relative;
-    top: 50px;
-    right:50px;
+.page_3_desc {
+  position: relative;
+  top: auto;
+  left: 15%;
+  text-align: left;
 }
-.space{
-   margin-top: 100px;
-    
+.space {
+  margin-top: 5%;
 }
 </style>
 
 <script>
-import json from '/src/json/test.json'
-      export default{
-          data(){
-              return{
-                  users: json,
-                  
-              }
-          }
-      }
+import json from "/src/json/test.json";
+export default {
+  data() {
+    return {
+      users: json,
+    };
+  },
+};
 </script>
 
