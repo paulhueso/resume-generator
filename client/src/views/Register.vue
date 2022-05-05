@@ -61,7 +61,7 @@ export default {
 }
 
 body {
-  background: #77b5fe;
+  background: #131313;
   font-family: 'Rubik', sans-serif;
 }
 
