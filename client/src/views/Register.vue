@@ -63,7 +63,7 @@ export default {
 }
 
 </script>
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;
@@ -72,7 +72,7 @@ export default {
 }
 
 body {
-  background: #131313;
+  background: #03045e;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -151,8 +151,8 @@ body {
   font-family: 'Rubik', sans-serif;
   cursor: pointer;
   text-transform: uppercase;
-  background: #e8e9ec;
-  color: #777;
+  background: #caf0f8;
+  color: #03045e;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 0;
   letter-spacing: 0.2px;
@@ -164,12 +164,13 @@ body {
   background: #d8d8d8;
 }
 .register-form .action button:nth-child(2) {
-  background: #2d3b55;
-  color: #fff;
+  background: #03045e;
+  color: #caf0f8;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 4px;
 }
 .register-form .action button:nth-child(2):hover {
-  background: #3c4d6d;
+  background: #caf0f8;
+  color: #03045e;
 }
 </style>

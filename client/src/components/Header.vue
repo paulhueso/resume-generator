@@ -25,13 +25,13 @@
   </header>
 
 </template>
-<style>
+<style scoped>
 .classe {
 position: fixed;
 width: 100%;
 height: 40px;
 top: 0%;
-background-color: rgb(65, 65, 65);
+background-color: #48CAE4;
 }
 .navbar {
     display: -ms-flexbox;
@@ -49,7 +49,7 @@ headeer top
 */
 .topbar{
    
-	background-color: #212529;
+	background-color: #03045e;
  
 }
 .topbar .container .row {
@@ -94,7 +94,7 @@ header .navbar {
 .topbar ul.info li {
     float: right;
     padding-left: 30px;
-    color: #0b003a;
+    color: #03045e;
     font-size: 13px;
     line-height: 44px;
 }
@@ -120,7 +120,7 @@ ul.social-network li i {
 ul.social-network li {
     display:inline;
     margin: 0 5px;
-    border: 0px solid #2D2D2D;
+    border: 0px solid #03045e;
     padding: 5px 0 0;
     width: 32px;
     display: inline-block;
@@ -151,7 +151,7 @@ ul.social-network {
     color: #fff;
 }
 a {
-  color: #0a0a0a;
+  color: #03045e;
   text-decoration: none;
 }
 li {
