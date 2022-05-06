@@ -1,5 +1,9 @@
 <template>
+
   <div>
+	
+
+     
     <div class="paper">
       <p class="page_title_1"><b>Cv ESN</b></p>
       <p class="page_1_elm">
@@ -19,7 +23,8 @@
 
     <ul>
       <li v-for="exp in user.cv_list[0].experiences" :key="exp.organization">
-        <div class="paper">
+        <div class="paper" >
+         
           <p class="page_title"><b>Experiences</b></p>
           <p class="page_2_exp">
             <b>////////{{exp.title}}///////////////////////////////////////////////////</b>
@@ -38,19 +43,15 @@
             {{ user.firstname }} {{ user.surname }}
           </p>
           <p class="page_2_desc">{{ exp.description }}</p>
-        </div>
+          </div>
+       
       </li>
     </ul>
 
-    <div class="paper">
+    <div class="paper" id="page">
       <p class="page_title_2"><b>Formations</b></p>
-      <p class="page_bottom_3">
-        <b>{{ user.current_organization }}</b>
-      </p>
-      <p class="page_bottom_4">
-        {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
-        {{ user.firstname }} {{ user.surname }}
-      </p>
+      
+      
       <ul>
         <li
           class="space"
@@ -70,13 +71,25 @@
           <p class="page_3_desc">{{ exp.description }}</p>
         </li>
 		</ul>
+    <p class="page_bottom_3">
+        <b>{{ user.current_organization }}</b>
+      </p>
+      <p class="page_bottom_4">
+        {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
+        {{ user.firstname }} {{ user.surname }}
+      </p>
     </div>
-  </div>
+
+  
+
+</div>
 </template>
 
 <script>
 import json from "/src/json/test.json";
+
 export default {
+ 
   data() {
     return {
       user: json,
@@ -87,6 +100,8 @@ export default {
 
 <style >
 .paper {
+  position: relative;
+
   margin-top: 1%;
   margin-left: auto;
   margin-right: auto;
@@ -97,7 +112,7 @@ export default {
   line-height: 1.5em;
   color: #000000;
   background-color: rgb(255, 255, 255);
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+
 }
 .page_title_1 {
   text-align: center;
@@ -172,23 +187,23 @@ export default {
 }
 .page_bottom_1 {
   position: relative;
-  top: 88%;
+  top: 83%;
   text-align: center;
 }
 .page_bottom_2 {
   position: relative;
-  top: 88%;
+  top: 83%;
   text-align: center;
 }
 .page_bottom_3 {
   position: relative;
-  top: 96%;
+  top: 64%;
 
   text-align: center;
 }
 .page_bottom_4 {
   position: relative;
-  top: 96%;
+  top: 64%;
   text-align: center;
 }
 .page_title_2 {

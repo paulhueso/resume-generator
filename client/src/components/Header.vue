@@ -120,7 +120,7 @@ ul.social-network li i {
 ul.social-network li {
     display:inline;
     margin: 0 5px;
-    border: 0px solid #2D2D2D;
+    border: 0px solid #ff0000;
     padding: 5px 0 0;
     width: 32px;
     display: inline-block;
