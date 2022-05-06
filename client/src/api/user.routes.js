@@ -13,7 +13,7 @@ module.exports = class Api{
                   },
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot log in : ${err}`));
+            .catch(err => alert(`Cannot log in : ${err}`));
         });
     }
 
