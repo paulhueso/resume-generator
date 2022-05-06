@@ -19,20 +19,6 @@ router.get('/api/users/name/:name', UserController.apiGetUserByName);
 router.post('/api/login/', UserController.apiLogin);
 
 /* LOGOUT */
-router.get('/api/logout/', UserController.apipLogout);
-
-/* WEBPAGE ROUTE FOR TESTS */
-router.get('/', (req,res) => {
-    console.log(req.session);
-    sess = req.session;
-    if(sess.isAthentificated){
-        res.send(`<h1>Hello ${sess.name} (sessions)</h1>`);
-    }
-    else{
-        sess.isAthentificated = true;
-        sess.name = "Nicolas";
-        res.send(`<h1>Cookie created</h1>`);
-    }
-})
+router.get('/api/logout/', UserController.apiLogout);
 
 module.exports = router;

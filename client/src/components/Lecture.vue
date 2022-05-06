@@ -65,7 +65,7 @@
               exp.organization
             }}
           </p>
-          <b class="page_3_des">Description :</b>
+          <p class="page_3_des"><b>Description :</b></p>
 
           <p class="page_3_desc">{{ exp.description }}</p>
         </li>
@@ -210,7 +210,8 @@ export default {
 .page_3_des {
   position: relative;
   top: auto;
-  right: 30%;
+  left: 10%;
+  text-align: left;
 }
 .page_3_desc {
   position: relative;

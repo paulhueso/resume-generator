@@ -23,7 +23,7 @@ module.exports = class User{
       }
    }
 
-   static async apipLogout(req, res){
+   static async apiLogout(req, res){
       if(req.session.isAuthentificated){
          req.session.destroy()
          res.status(200).json("Session destroyed");
