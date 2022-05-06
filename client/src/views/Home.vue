@@ -4,10 +4,8 @@
   <Sidebar/>
   <h1>Accueil</h1>
   <p>{{name}}</p>
-  
-
-<Lecture/>
- </div>
+	<Lecture/>
+</div>
 </template>
 <script>
  import Lecture from '/src/components/Lecture.vue'
@@ -16,9 +14,9 @@
 
 export default {
   components: {
-    Lecture,
-    Sidebar,
-    Header
+	Lecture,
+	Sidebar,
+	Header
   },
   name: 'Accueil',
   props: ['name'],

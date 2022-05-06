@@ -6,36 +6,36 @@
         //////////////////////////////////// DOSSIER TECHNIQUE
       </p>
       <p class="page_1_name">
-        /////////////////////////// MONSIEUR {{ users.firstname }}
-        {{ users.surname }}
+        /////////////////////////// MONSIEUR {{ user.firstname }}
+        {{ user.surname }}
       </p>
       <p class="page_1_ent">
-        <b> {{ users.current_organization }}</b>
+        <b> {{ user.current_organization }}</b>
       </p>
-      <p class="page_1_add">{{ users.address }}</p>
-      <p class="page_1_tel">Tél: {{ users.tel }}</p>
-      <p class="page_1_mel">Mail: {{ users.mail }}</p>
+      <p class="page_1_add">{{ user.address }}</p>
+      <p class="page_1_tel">Tél: {{ user.tel }}</p>
+      <p class="page_1_mel">Mail: {{ user.mail }}</p>
     </div>
 
     <ul>
-      <li v-for="exp in users.cv_list[0].experiences" :key="exp.organization">
+      <li v-for="exp in user.cv_list[0].experiences" :key="exp.organization">
         <div class="paper">
           <p class="page_title"><b>Experiences</b></p>
           <p class="page_2_exp">
             <b>////////{{exp.title}}///////////////////////////////////////////////////</b>
           </p>
           <p class="page_2_miss">
-            {{ exp.from }} - {{ exp.to }}| {{ users.current_organization }} |{{
+            {{ exp.from }} - {{ exp.to }}| {{ user.current_organization }} |{{
               exp.organization
             }}
           </p>
           <p class="page_2_descp"><b>Description :</b></p>
           <p class="page_bottom_1">
-            <b>{{ users.current_organization }}</b>
+            <b>{{ user.current_organization }}</b>
           </p>
           <p class="page_bottom_2">
-            {{ users.address }} . Tél: {{ users.tel }} . DT de Monsieur
-            {{ users.firstname }} {{ users.surname }}
+            {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
+            {{ user.firstname }} {{ user.surname }}
           </p>
           <p class="page_2_desc">{{ exp.description }}</p>
         </div>
@@ -45,16 +45,16 @@
     <div class="paper">
       <p class="page_title_2"><b>Formations</b></p>
       <p class="page_bottom_3">
-        <b>{{ users.current_organization }}</b>
+        <b>{{ user.current_organization }}</b>
       </p>
       <p class="page_bottom_4">
-        {{ users.address }} . Tél: {{ users.tel }} . DT de Monsieur
-        {{ users.firstname }} {{ users.surname }}
+        {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
+        {{ user.firstname }} {{ user.surname }}
       </p>
       <ul>
         <li
           class="space"
-          v-for="exp in users.cv_list[0].formations"
+          v-for="exp in user.cv_list[0].formations"
           :key="exp.school"
         >
           <p class="page_3_exp">
@@ -73,6 +73,17 @@
     </div>
   </div>
 </template>
+
+<script>
+import json from "/src/json/test.json";
+export default {
+  data() {
+    return {
+      user: json,
+    };
+  },
+};
+</script>
 
 <style >
 .paper {
@@ -212,14 +223,5 @@
 }
 </style>
 
-<script>
-import json from "/src/json/test.json";
-export default {
-  data() {
-    return {
-      users: json,
-    };
-  },
-};
-</script>
+
 
