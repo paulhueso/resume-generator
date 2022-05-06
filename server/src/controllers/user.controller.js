@@ -23,6 +23,16 @@ module.exports = class User{
       }
    }
 
+   static async apipLogout(req, res){
+      if(req.session.isAuthentificated){
+         req.session.destroy()
+         res.status(200).json("Session destroyed");
+      }
+      else{
+          res.status(401).json("User unauthenticated")
+      }
+   }
+
    static async apiGetAllUsers(req, res){
       try {
          const users = await UserService.getAllUsers();

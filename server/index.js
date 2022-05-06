@@ -7,9 +7,9 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 const cors = require('cors');
 
+var database = require('./src/config/database')
 const MongoStore = require('connect-mongo')(session);
-mongoose.connect('mongodb://localhost:27017/resume-generator');
-let db = mongoose.connection;
+
 
 //routes
 let usersRouter = require('./src/routes/user.routes.js');
