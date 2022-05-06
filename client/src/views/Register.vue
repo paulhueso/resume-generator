@@ -9,6 +9,8 @@
 <body>
 <!-- partial:index.partial.html -->
 <div class="register-form">
+<h1 class = "accueilclasse"> Sea V generator: do it whale</h1>
+  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F559809%2Fscreenshots%2F1672971%2Fwhale_logo.jpg&f=1&nofb=1" width="200" height="150" class = "logo">
   <form>
     <h1>Inscription</h1>
     <div class="content">
@@ -72,7 +74,7 @@ export default {
 }
 
 body {
-  background: #03045e;
+  background: #ADE8F4;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -91,6 +93,7 @@ body {
 .register-form h1 {
   padding: 35px 35px 0 35px;
   font-weight: 300;
+  text-align: center;
 }
 .register-form .content {
   padding: 35px;
@@ -172,5 +175,10 @@ body {
 .register-form .action button:nth-child(2):hover {
   background: #caf0f8;
   color: #03045e;
+}
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

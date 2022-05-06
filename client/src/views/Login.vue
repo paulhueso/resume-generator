@@ -10,6 +10,8 @@
 	<body>
 	<!-- partial:index.partial.html -->
 	<div class="login-form">
+	<h1 class = "accueilclasse"> Sea V generator: do it whale</h1>
+  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F559809%2Fscreenshots%2F1672971%2Fwhale_logo.jpg&f=1&nofb=1" width="200" height="150" class = "logo">
 		<form>
 			<h1>Identification</h1>
 			<div class="content">
@@ -169,5 +171,10 @@ body {
 .login-form .action button:nth-child(2):hover {
 	background: #caf0f8;
 	color: #03045e;
+}
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
