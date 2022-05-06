@@ -37,6 +37,15 @@ app.use(session({
   }
 }))
 
+app.use(session({
+  secret: 'secret of our project',
+  resave: false,
+  saveUnitialized: true,
+  cookie:{
+    maxAge: 1000* 60 * 60 //One hour = 1000 ms * 60 * 60
+  }
+}))
+
 app.use('/', usersRouter);
 
 
