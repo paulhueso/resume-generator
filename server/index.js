@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose.connect('mongodb://localhost:27017/data');
 let db = mongoose.connection;
@@ -22,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 app.use('/', usersRouter);
 
 app.listen(3000, () => console.log(`Hello world app listening on port 3000!`))
