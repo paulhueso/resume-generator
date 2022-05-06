@@ -4,11 +4,18 @@ const bcrypt = require('bcrypt');
 
 module.exports = class UserService{
 
-    static async login(data){
+    static async login(data,session){
         try {
             let user = await User.findOne({mail: data.mail});
             const verified = bcrypt.compareSync(data.password, user.password);
-            return verified;
+            if(verified){
+                session.user = user
+                session.isAuthentificated = true
+                return true
+            }
+            else{
+                return false
+            }
         } catch (error) {
             console.log(error);
         } 

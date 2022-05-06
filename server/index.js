@@ -1,13 +1,15 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect('mongodb://localhost:27017/data');
-let db = mongoose.connection;
+var database = require('./src/config/database')
+const MongoStore = require('connect-mongo')(session);
+
 
 //routes
 let usersRouter = require('./src/routes/user.routes.js');
@@ -24,7 +26,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+app.use(session({
+  secret: 'secret of our project',
+  resave: false,
+  saveUnitialized: true,
+  store: new MongoStore({ url: 'mongodb://localhost:27017/resume-generator'}),
+  cookie:{
+    maxAge: 1000* 60 * 60 //One hour = 1000 ms * 60 * 60
+  }
+}))
+
+app.use(session({
+  secret: 'secret of our project',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({ url: 'mongodb://localhost:27017/resume-generator'}),
+  cookie:{
+    maxAge: 1000* 60 * 60 //One hour = 1000 ms * 60 * 60
+  }
+}))
+
 app.use('/', usersRouter);
+
+
+
+
 
 app.listen(3000, () => console.log(`Hello world app listening on port 3000!`))
 

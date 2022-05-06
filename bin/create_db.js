@@ -1,4 +1,4 @@
-var db = connect('127.0.0.1:27017/data'), users = null;
+var db = connect('127.0.0.1:27017/resume-generator'), users = null;
 db.dropDatabase();
 
 print("Database created");
