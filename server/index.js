@@ -40,7 +40,7 @@ app.use(session({
 app.use(session({
   secret: 'secret of our project',
   resave: false,
-  saveUnitialized: true,
+  saveUninitialized: true,
   store: new MongoStore({ url: 'mongodb://localhost:27017/resume-generator'}),
   cookie:{
     maxAge: 1000* 60 * 60 //One hour = 1000 ms * 60 * 60
