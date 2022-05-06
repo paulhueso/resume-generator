@@ -14,7 +14,7 @@
 			<h1>Identification</h1>
 			<div class="content">
 				<div class="input-field">
-					<input type="identifier" placeholder="Identifiant" autocomplete="nope" v-model="mailInput">
+					<input type="email" placeholder="E-mail" autocomplete="nope" v-model="mailInput">
 				</div>
 				<div class="input-field">
 					<input type="password" placeholder="Mot de passe" autocomplete="new-password" v-model="passwordInput">

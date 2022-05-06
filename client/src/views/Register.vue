@@ -1,4 +1,5 @@
 <template>
+<div>
 <head>
   <meta charset="UTF-8">
   <title>Register Form</title>
@@ -12,23 +13,20 @@
     <h1>Inscription</h1>
     <div class="content">
       <div class="input-field">
-        <input type="identifier" placeholder="Identifiant" autocomplete="nope">
+        <input type="email" placeholder="Email" v-model="mailInput">
       </div>
       <div class="input-field">
-        <input type="mail" placeholder="Email" autocomplete="nope">
+        <input type="text" placeholder="Nom" v-model="nameInput">
       </div>
       <div class="input-field">
-        <input type="nom" placeholder="Nom" autocomplete="Nom">
+        <input type="text" placeholder="Prénom" v-model="firstnameInput">
       </div>
       <div class="input-field">
-        <input type="prénom" placeholder="Prénom" autocomplete="Prénom">
-      </div>
-      <div class="input-field">
-        <input type="password" placeholder="Mot de passe" autocomplete="new-password">
+        <input type="password" placeholder="Mot de passe" autocomplete="new-password" v-model="passwordInput">
       </div>
     </div>
     <div class="action">
-      <button @click="goToConnection()">S'inscrire'</button>
+      <button @click="registerUser(mailInput, passwordInput, nameInput, firstnameInput)">S'inscrire'</button>
       <button @click="goToConnection()">Se connecter</button>
     </div>
   </form>
@@ -37,17 +35,30 @@
 
 
 </body>
+</div>
 </template>
 <script>
+const Api = require("../api/user.routes");
 
 
 
 export default {
-  name: 'Connection',
   methods: {
     goToConnection: function () {
       this.$router.push({ name: 'Login'})
     },
+    registerUser: function (mailInput, passwordInput, nameInput, firstnameInput) {
+      Api.register(mailInput, passwordInput, nameInput, firstnameInput)
+      .then(res => {
+      console.log(res);
+      if(res.status == 200) {
+        this.$router.push({ name: 'Login'});
+        console.log("Granted")
+      } else {
+        console.log("Unauthorized");
+      }
+      });
+	},
   }
 }
 

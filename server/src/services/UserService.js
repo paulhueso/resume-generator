@@ -47,7 +47,7 @@ module.exports = class UserService{
                 'firstname': data.firstname,
                 'surname' : data.lastname,
                 'address' : data.address,
-                'mail' : data.mail.toLowerCase(),
+                'mail' : data.mail,
                 'password' : bcrypt.hashSync(data.password, 10),
                 'tel' : data.phone,
                 'cv_list' : data.cv_list || []
