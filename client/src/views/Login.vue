@@ -38,22 +38,25 @@ export default {
 	components: {
 	Header
 	},
+	
 	methods: {
-	goToRegister: function () {
-		this.$router.push({ name: 'Register'});
-	},
-	goToMain: function (mailInput, passwordInput) {
-		Api.login(mailInput, passwordInput)
-		.then(res => {
-		console.log(res);
-		if(res.status == 200) {
-			this.$router.push({ name: 'Home'});
-			console.log("Granted")
-		} else {
-			console.log("Unauthorized");
-		}
-		});
-	},
+
+		goToRegister: function () {
+			this.$router.push({ name: 'Register'});
+		},
+		
+		goToMain: function (mailInput, passwordInput) {
+			Api.login(mailInput, passwordInput)
+			.then(res => {
+				console.log(res);
+				if(res.status == 200) {
+					this.$router.push({ name: 'Home'});
+					console.log("Granted")
+				} else {
+					console.log("Unauthorized");
+				}
+			});
+		},
 	}
 }
 
