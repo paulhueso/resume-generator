@@ -114,7 +114,7 @@ vertical-align: middle;
 font-size:20px;
 }
 .styled{
-    background:#212121;
+    background:#48CAE4;
     color:#ffffff
 }
 .main-menu:hover,nav.main-menu.expanded {
@@ -122,7 +122,7 @@ width:250px;
 overflow:visible;
 }
 .main-menu {
-background:#212121;
+background:#48CAE4;
 border-right:1px solid #e5e5e5;
 position:fixed;
 top:0;

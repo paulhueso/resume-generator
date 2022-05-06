@@ -68,7 +68,7 @@ export default {
 }
 
 body {
-	background: #77b5fe;
+	background: #ADE8F4;
 	font-family: 'Rubik', sans-serif;
 }
 
@@ -87,6 +87,7 @@ body {
 .login-form h1 {
 	padding: 35px 35px 0 35px;
 	font-weight: 300;
+	text-align: center;
 }
 .login-form .content {
 	padding: 35px;
@@ -147,8 +148,8 @@ body {
 	font-family: 'Rubik', sans-serif;
 	cursor: pointer;
 	text-transform: uppercase;
-	background: #e8e9ec;
-	color: #777;
+	background: #caf0f8;
+	color: #03045e;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 0;
 	letter-spacing: 0.2px;
@@ -160,12 +161,13 @@ body {
 	background: #d8d8d8;
 }
 .login-form .action button:nth-child(2) {
-	background: #2d3b55;
-	color: #fff;
+	background: #03045e;
+	color: #caf0f8;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 4px;
 }
 .login-form .action button:nth-child(2):hover {
-	background: #3c4d6d;
+	background: #caf0f8;
+	color: #03045e;
 }
 </style>
