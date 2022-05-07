@@ -98,6 +98,14 @@ export default {
   color: #000000;
   background-color: rgb(255, 255, 255);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+	background: #fff;
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+			flex-direction: column;
+	border-radius: 4px;
+	box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
 }
 .page_title_1 {
   text-align: center;
