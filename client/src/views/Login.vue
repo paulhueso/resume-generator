@@ -1,6 +1,5 @@
 <template>
 <div>
-	<Header/>
 	<head>
 		<meta charset="UTF-8">
 		<title>Simple Login Form Example</title>
@@ -33,16 +32,14 @@
 </div>
 </template>
 <script>
-import Header from '/src/components/Header.vue'
 const Api = require("../api/user.routes");
 
 export default {
 	components: {
-	Header
 	},
 	methods: {
 	goToRegister: function () {
-		this.$router.push({ name: 'Register'});
+		this.$router.push({name: 'Register'});
 	},
 	goToMain: function (mailInput, passwordInput) {
 		Api.login(mailInput, passwordInput)
