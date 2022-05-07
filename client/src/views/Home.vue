@@ -18,7 +18,7 @@
  import Lecture from '/src/components/Lecture.vue'
  import Sidebar from '/src/components/Sidebar.vue'
  import Header from '/src/components/Header.vue'
- import DownloadButton from "/src/components//DownloadButton.vue";
+ import DownloadButton from "/src/components/DownloadButton.vue";
 export default {
   components: {
 	Lecture,
