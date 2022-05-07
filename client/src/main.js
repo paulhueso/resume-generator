@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Home from './views/Home.vue'
@@ -8,6 +13,8 @@ import NotFound from './views/NotFound.vue'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 const router = new VueRouter({
   routes: [
