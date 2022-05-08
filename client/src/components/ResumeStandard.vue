@@ -18,9 +18,6 @@
         <p class="">Mail: {{ user.mail }}</p>
         <nested-draggable :tasks="user.cv_list[0]" />
       </div>
-      <section slot="pdf-content"> 
-        <!-- PDF Content Here --> 
-      </section>
     </div>
   </div>
 </template>
