@@ -1,4 +1,4 @@
-# router-example
+# resume-generator
 
 ## Project setup
 ```

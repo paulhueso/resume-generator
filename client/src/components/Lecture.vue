@@ -87,17 +87,20 @@ export default {
 
 <style >
 .paper {
-  margin-top: 1%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2.5%;
+  margin: 1% auto 2.5% auto;
+  padding: 1.5cm 2cm;
   height: 29.7cm;
   width: 21cm;
-  padding: 35px 20px;
   line-height: 1.5em;
   color: #000000;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+	background: #fff;
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+					flex-direction: column;
+	border-radius: 4px;
+	box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);  
 }
 .page_title_1 {
   text-align: center;
