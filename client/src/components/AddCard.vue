@@ -1,15 +1,12 @@
 <template>
 <div>
   <b-card
-        :title="title"
-        :sub-title="period"
-        style="max-width: 20rem;"
-        class="mb-2"
-        v-b-modal="modalName"
-    >
-    <b-card-text>
-        {{ description }}
-    </b-card-text>
+    overlay
+    img-src="https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0="
+    style="max-width: 20rem; max-height: 3rem;"
+    class="mb-2"
+    v-b-modal="modalName"
+  >
     </b-card>
 
     <b-modal
@@ -30,7 +27,7 @@
         >
             <b-form-input
                 id="title"
-                v-model="titleInput"
+                v-model="title"
                 :state="nameState"
                 required
             ></b-form-input>
@@ -44,7 +41,7 @@
         >
             <b-form-input
                 id="period"
-                v-model="periodInput"
+                v-model="period"
                 :state="nameState"
                 required
             ></b-form-input>
@@ -59,7 +56,7 @@
         >
             <b-form-input
                 id="description"
-                v-model="descriptionInput"
+                v-model="description"
                 :state="nameState"
                 required
             ></b-form-input>
@@ -72,17 +69,12 @@
 
 <script>
 export default {
-    props : [
-        'modalName',
-        'title',
-        'period',
-        'description'
-    ],
+    props : ['modalName'],
     data() {
       return {
-        titleInput: this.title,
-        periodInput: this.period,
-        descriptionInput: this.description,
+        title: '',
+        period: '',
+        description: '',
         nameState: null,
         submittedNames: []
       }

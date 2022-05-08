@@ -13,18 +13,15 @@
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
         <b-tab title="Formations" active>
-          <div class="px-3 py-2">
-            <Card modalName="test" />
-
+          <div v-for="experience in user.experiences" :key="experience.id" class="px-3 py-2">
+            <Card :modalName="experience.title" :title="experience.title" :period="experience.from" :description="experience.description" />
           </div>
+          <!-- <AddCard /> -->
         </b-tab>
 
         <b-tab title="Experiences">
-          <div class="px-3 py-2">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+          <div v-for="formation in user.formations" :key="formation.id" class="px-3 py-2">
+            <Card :modalName="formation.name" :title="formation.name" :period="formation.from" :description="formation.description" />
           </div>
         </b-tab>
       </b-tabs>
@@ -38,15 +35,25 @@
 import Lecture from '/src/components/Lecture.vue'  
 import Navbar from '/src/components/Navbar.vue'
 import Card from '/src/components/Card.vue'
+import AddCard from '/src/components/AddCard.vue'
+import json from "/src/json/test.json";
+
 
 export default {
   components: {
     Lecture,
     Navbar,
-    Card
+    Card,
+    AddCard
   },
   name: 'Accueil',
   props: ['name'],
+  data() {
+    return {
+      user: json,
+    };
+  },
+
 }
 </script>
 
