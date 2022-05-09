@@ -10,6 +10,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Home from './views/Home.vue'
 import NotFound from './views/NotFound.vue'
+import Profile from './views/Profile.vue'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -32,6 +33,11 @@ const router = new VueRouter({
       path: "/home",
       component: Home,
       name: 'Home'
+    },
+    {
+      path: "/profile",
+      component: Profile,
+      name: 'Profile'
     },
     {
       path: "/:pathMatch(.*)*",
