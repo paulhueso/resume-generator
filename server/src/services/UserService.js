@@ -1,5 +1,7 @@
-const User = require("../models/user");
+const User = require("../models/user.model");
+const Cv = require("../models/cv.model");
 const bcrypt = require('bcrypt');
+const { ObjectId } = require("mongodb");
 
 
 module.exports = class UserService{
@@ -9,15 +11,24 @@ module.exports = class UserService{
             let user = await User.findOne({mail: data.mail});
             const verified = bcrypt.compareSync(data.password, user.password);
             if(verified){
-                session.user = user
-                session.isAuthentificated = true
-                return true
+                session.user = user;
+                session.isAuthentificated = true;
+                session.cv_list = []
+                for(var i = 0; i < user.cv_list.length; i++){
+                    let cv = await Cv.findOne({_id: user.cv_list[i]});
+                    if(cv){
+                        session.cv_list.push(cv)
+                    }
+                    else{console.log("Error finding cv by id in 'login'")}
+                }
+                 
+                return true;
             }
             else{
-                return false
+                return false;
             }
         } catch (error) {
-            console.log(error);
+            console.log("Error login: " + error);
         } 
     }
 
@@ -59,8 +70,12 @@ module.exports = class UserService{
                 'tel' : data.phone,
                 'cv_list' : data.cv_list || []
             }
-           const response = await new User(newUser).save();
-           return response;
+            const res = await User.findOne({mail: data.mail});
+            if(!res){
+                const response = await new User(newUser).save();
+                return response;
+            }
+            else return null
         } catch (error) {
             console.log(error);
         } 

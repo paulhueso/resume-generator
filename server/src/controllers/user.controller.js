@@ -8,7 +8,7 @@ module.exports = class User{
                res.status(200).json("Access granted via cookie");
             }
             else{
-               console.log(req.session)
+               //console.log(req.session)
                let verified = await UserService.login(req.body,req.session);
                if(verified){
                   res.status(200).json("Access granted via password");
@@ -18,6 +18,25 @@ module.exports = class User{
                }
             }
       } 
+      catch (error) {
+         res.status(500).json({error: error})
+      }
+   }
+
+   static async apiisLoggedIn(req,res){
+      if(req.session.isAuthentificated) res.status(200).json("You are logged in");
+      else res.status(401).json("You aren't logged in");
+   }
+
+   static async apiGetUser(req,res){
+      try {
+            if(req.session.isAuthentificated){
+               res.status(200).json(req.session.user);
+            }
+            else{
+                  res.status(401).json("Unauthorized");
+               }
+      }
       catch (error) {
          res.status(500).json({error: error})
       }
@@ -69,7 +88,12 @@ module.exports = class User{
       try {
          let user = req.body || {};
          const createdUser = await UserService.createUser(user);
-         res.json(createdUser);
+         if(createdUser){
+            res.status(200).json(createdUser);
+         }
+         else{
+            res.status(401).json("Email's already used.");
+         }
       } catch (error) {
          res.status(500).json({error: error})
       }
