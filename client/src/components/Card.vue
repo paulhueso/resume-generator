@@ -3,7 +3,6 @@
   <b-card
         :title="title"
         :sub-title="period"
-        style="max-width: 20rem;"
         class="mb-2"
         v-b-modal="modalName"
     >
@@ -28,12 +27,12 @@
           invalid-feedback="Complete all infos"
           :state="nameState"
         >
-            <b-form-input
-                id="title"
-                v-model="titleInput"
-                :state="nameState"
-                required
-            ></b-form-input>
+          <b-form-input
+              id="title"
+              v-model="titleInput"
+              :state="nameState"
+              required
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -42,12 +41,12 @@
           invalid-feedback="Complete all infos"
           :state="nameState"
         >
-            <b-form-input
-                id="period"
-                v-model="periodInput"
-                :state="nameState"
-                required
-            ></b-form-input>
+          <b-form-input
+              id="period"
+              v-model="periodInput"
+              :state="nameState"
+              required
+          ></b-form-input>
         </b-form-group>
 
 
@@ -57,12 +56,12 @@
             invalid-feedback="Complete all infos"
             :state="nameState"
         >
-            <b-form-input
-                id="description"
-                v-model="descriptionInput"
-                :state="nameState"
-                required
-            ></b-form-input>
+          <b-form-input
+              id="description"
+              v-model="descriptionInput"
+              :state="nameState"
+              required
+          ></b-form-input>
         </b-form-group>
       </form>
     </b-modal>
@@ -76,7 +75,9 @@ export default {
         'modalName',
         'title',
         'period',
-        'description'
+        'description',
+        'updateExperience',
+        'index'
     ],
     data() {
       return {
@@ -84,15 +85,9 @@ export default {
         periodInput: this.period,
         descriptionInput: this.description,
         nameState: null,
-        submittedNames: []
       }
     },
     methods: {
-      checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
-      },
       resetModal() {
         this.name = ''
         this.nameState = null
@@ -104,15 +99,11 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
-        // Push the name to submitted names
-        this.submittedNames.push(this.name)
+        this.$emit('updateExperience', this.titleInput, this.periodInput, this.descriptionInput, this.index)
+
         // Hide the modal manually
         this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
+          this.$refs['modal'].hide()
         })
       }
     }
