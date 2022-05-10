@@ -60,9 +60,12 @@ export default {
       this.user.cv_list[0].experiences[id].description = description;
     },
 
-    saveResume() {
+    async saveResume() {
       Api.saveResume(this.user.cv_list[0]);
-    }
+    },
+  },
+  mounted(){
+    Api.fetchResume(this.$router.params.resume).then(resume => this.resume = resume)
   }
 
 }
