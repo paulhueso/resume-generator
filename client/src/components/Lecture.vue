@@ -77,11 +77,9 @@
 <script>
 import json from "/src/json/test.json";
 export default {
-  data() {
-    return {
-      user: json,
-    };
-  },
+  props : [
+    'user'
+  ]
 };
 </script>
 
