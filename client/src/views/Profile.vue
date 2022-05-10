@@ -31,7 +31,7 @@
         <input type="text" placeholder="Address"  v-model="address">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Tel"  v-model="tel">
+        <input type="tel" placeholder="Tel" pattern="[0][0-9]{9}" v-model="tel">
       </div>
        <div class="input-field">
         <input type="text" placeholder="Entreprise Actuelle"  v-model="current_organization">
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import Navbar from '/src/components/Navbar.vue'
+
 import json from "/src/json/test.json";
 const Api = require("../api/user.routes");
 export default {
