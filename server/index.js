@@ -13,6 +13,7 @@ const MongoStore = require('connect-mongo')(session);
 
 //routes
 let usersRouter = require('./src/routes/user.routes.js');
+let cvsRouter = require('./src/routes/cv.routes.js')
 
 var app = express();
 
@@ -30,17 +31,7 @@ app.use(cors());
 app.use(session({
   secret: 'secret of our project',
   resave: false,
-  saveUnitialized: true,
-  store: new MongoStore({ url: 'mongodb://localhost:27017/resume-generator'}),
-  cookie:{
-    maxAge: 1000* 60 * 60 //One hour = 1000 ms * 60 * 60
-  }
-}))
-
-app.use(session({
-  secret: 'secret of our project',
-  resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new MongoStore({ url: 'mongodb://localhost:27017/resume-generator'}),
   cookie:{
     maxAge: 1000* 60 * 60 //One hour = 1000 ms * 60 * 60
@@ -48,10 +39,7 @@ app.use(session({
 }))
 
 app.use('/', usersRouter);
-
-
-
-
+app.use('/', cvsRouter);
 
 app.listen(3000, () => console.log(`Hello world app listening on port 3000!`))
 
