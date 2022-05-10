@@ -30,4 +30,17 @@ module.exports = class Api{
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
+
+    static async fetchResume(id){
+        return new Promise(function(resolve) {
+            axios.get(`http://localhost/api/cv/${id}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+            })
+            .then(resume => resolve(resume))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
 }

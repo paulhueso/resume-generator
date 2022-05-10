@@ -55,7 +55,9 @@ export default {
       user: json,
     };
   },
-
+  mounted(){
+    Api.fetchResume(this.$router.params.resume).then(resume => this.resume = resume)
+  }
 }
 </script>
 
