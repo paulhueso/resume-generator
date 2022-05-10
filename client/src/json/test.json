@@ -11,34 +11,26 @@
             "titre":"CV 1",
             "experiences" : [
                 {
-                    "organization" : "Unlatch",
-                    "title" : "Stage developpeur fullstack",
-                    "from" : "Aout 2021",
-                    "to" : "Janvier 2022",
+                    "title" : "Stage developpeur fullstack - Unlatch",
+                    "period" : "Aout 2021 - Janvier 2022",
                     "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
                 },
 				{
-                    "organization" : "Deuxieme",
-                    "title" : "Stage developpeur fullstack2",
-                    "from" : "Aout 2021",
-                    "to" : "Janvier 2022",
+                    "title" : "Stage developpeur fullstack2 - Deuxieme",
+                    "period" : "Aout 2021 - Janvier 2022",
                     "description" : ""
                 }
             ],
             "formations" : [
 				{
-                    "school" : "INSA HdF",
-                    "name" : "ICY",
-                    "from" : "2020",
-                    "to" : "2023",
+                    "name" : "ICY - INSA HdF",
+                    "period" : "2020 - 2023",
                     "description" : "super experience, je recommande, +1 pour l\"organisation"
                 },
                 {
-                    "school" : "Polytech Sorbonne",
-                    "name" : "Prepa integree",
-                    "from" : "2018",
-                    "to" : "2020",
-                    "description" : "J\"y ai appris beaucoup de choses................."
+                    "name" : "Prepa integree - Polytech Sorbonne",
+                    "period" : "2018 - 2020",
+                    "description" : "J\"y ai appris beaucoup de choses"
                 }
                 
             ]
@@ -76,6 +68,7 @@
                     "from" : "2018",
                     "to" : "2020",
                     "description" : "J\"y ai appris beaucoup de choses................."
+ 
                 }
                 
             ]

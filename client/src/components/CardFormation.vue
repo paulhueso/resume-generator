@@ -24,13 +24,10 @@
         <b-form-group
           label="Experience"
           label-for="title"
-          invalid-feedback="Complete all infos"
-          :state="nameState"
         >
           <b-form-input
               id="title"
               v-model="titleInput"
-              :state="nameState"
               required
           ></b-form-input>
         </b-form-group>
@@ -38,13 +35,10 @@
         <b-form-group
           label="Periode de travail"
           label-for="period"
-          invalid-feedback="Complete all infos"
-          :state="nameState"
         >
           <b-form-input
               id="period"
               v-model="periodInput"
-              :state="nameState"
               required
           ></b-form-input>
         </b-form-group>
@@ -54,14 +48,13 @@
             label="Description"
             label-for="description"
             invalid-feedback="Complete all infos"
-            :state="nameState"
         >
-          <b-form-input
+          <b-form-textarea
               id="description"
               v-model="descriptionInput"
-              :state="nameState"
               required
-          ></b-form-input>
+              rows="8"
+          ></b-form-textarea>
         </b-form-group>
       </form>
     </b-modal>
@@ -76,7 +69,7 @@ export default {
         'title',
         'period',
         'description',
-        'updateExperience',
+        'updateFormation',
         'index'
     ],
     data() {
@@ -99,7 +92,7 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
-        this.$emit('updateExperience', this.titleInput, this.periodInput, this.descriptionInput, this.index)
+        this.$emit('updateFormation', this.titleInput, this.periodInput, this.descriptionInput, this.index)
 
         // Hide the modal manually
         this.$nextTick(() => {
@@ -111,5 +104,4 @@ export default {
 </script>
 
 <style>
-
 </style>

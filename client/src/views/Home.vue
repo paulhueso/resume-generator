@@ -11,13 +11,27 @@
       <b-tabs content-class="mt-3">
         <b-tab title="Formations" active>
           <div v-for="(experience, index) in user.cv_list[0].experiences" :key="index" class="px-3 py-2">
-            <Card :modalName="experience.title" :title="experience.title" :period="experience.from" :description="experience.description" :index="index" @updateExperience="updateExperience"/>
+            <CardExperience 
+              :modalName="experience.title" 
+              :title="experience.title" 
+              :period="experience.period" 
+              :description="experience.description" 
+              :index="index" 
+              @updateExperience="updateExperience"
+            />
           </div>
         </b-tab>
 
         <b-tab title="Experiences">
-          <div v-for="formation in user.cv_list[0].formations" :key="formation.id" class="px-3 py-2">
-            <Card :modalName="formation.name" :title="formation.name" :period="formation.from" :description="formation.description" />
+          <div v-for="(formation, index) in user.cv_list[0].formations" :key="index" class="px-3 py-2">
+            <CardFormation 
+              :modalName="formation.name" 
+              :title="formation.name" 
+              :period="formation.period" 
+              :description="formation.description"
+              :index="index"
+              @updateFormation="updateFormation" 
+            />
           </div>
         </b-tab>
       </b-tabs>
@@ -31,7 +45,8 @@
 import Lecture from '/src/components/Lecture.vue'  
 import ResumeStandard from '/src/components/ResumeStandard.vue'  
 import Navbar from '/src/components/Navbar.vue'
-import Card from '/src/components/Card.vue'
+import CardExperience from '/src/components/CardExperience.vue'
+import CardFormation from '/src/components/CardFormation.vue'
 import AddCard from '/src/components/AddCard.vue'
 import json from "/src/json/test.json";
 const Api = require("../api/user.routes");
@@ -42,7 +57,8 @@ export default {
   components: {
     Lecture,
     Navbar,
-    Card,
+    CardExperience,
+    CardFormation,
     AddCard,
     ResumeStandard
   
@@ -62,6 +78,13 @@ export default {
       this.user.cv_list[0].experiences[id].title = title; 
       this.user.cv_list[0].experiences[id].period = period; 
       this.user.cv_list[0].experiences[id].description = description;
+    },
+
+    updateFormation(name, period, description, id) {
+      console.log("hey")
+      this.user.cv_list[0].formations[id].name = name; 
+      this.user.cv_list[0].formations[id].period = period; 
+      this.user.cv_list[0].formations[id].description = description;
     },
 
     saveResume() {
