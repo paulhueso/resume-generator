@@ -39,8 +39,11 @@ import Card from '/src/components/Card.vue'
 import AddCard from '/src/components/AddCard.vue'
 import json from "/src/json/test.json";
 
+const Api = require("../api/user.routes");
+
 
 export default {
+
   components: {
     Lecture,
     Navbar,
@@ -55,6 +58,14 @@ export default {
       user: json,
     };
   },
+  mounted()
+    {
+      //let token = requête get /api/user/
+      if(false) //token par la suite
+      {
+        this.$router.push({name:'Login'})
+      }
+    }
 
 }
 </script>
