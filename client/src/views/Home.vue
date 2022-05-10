@@ -19,7 +19,9 @@
               @updateExperience="updateExperience"
             />
           </div>
+          <AddCard class="px-3" modalName="addExp" :isExperience='true' @createNewExperience='createNewExperience' />
         </b-tab>
+        <!-- TODO: change key to index + dont allow empty title -->
 
         <b-tab title="Experiences">
           <div v-for="(formation, index) in resume.formations" :key="index" class="px-3 py-2">
@@ -32,6 +34,7 @@
               @updateFormation="updateFormation" 
             />
           </div>
+          <AddCard class="px-3" modalName="addFormation" :isExperience='false' @createNewFormation='createNewFormation' />
         </b-tab>
       </b-tabs>
       
@@ -94,6 +97,25 @@ export default {
     .then(res => {
       this.resume = res;
     });
+  },
+
+  methods: {
+
+    createNewExperience(title, period, description) {
+      this.user.experiences.push({
+        title: title,
+        period: period,
+        description: description
+      });
+    },
+
+    createNewFormation(title, period, description) {
+      this.user.formations.push({
+        name: title,
+        period: period,
+        description: description
+      });
+    }
   }
 
 }
@@ -116,7 +138,6 @@ body {
 #navbar {
   top: 0%
 }
-
 
 
 </style>

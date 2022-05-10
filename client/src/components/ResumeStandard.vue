@@ -16,7 +16,6 @@
         <p class="">{{ user.address }}</p>
         <p class="">Tél: {{ user.tel }}</p>
         <p class="">Mail: {{ user.mail }}</p>
-        <nested-draggable :tasks="user.cv_list[0]" />
       </div>
     </div>
   </div>
