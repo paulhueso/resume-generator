@@ -1,7 +1,7 @@
 <template>
 
 <div>
-    <b-navbar toggleable="lg" type="dark" variant="info" sticky="true">
+    <b-navbar toggleable="lg" type="dark" variant="info" :sticky="true" style="position: fixed; width: 100%">
     <b-navbar-brand id="title" href="#"> Sea V generator - Do it whale</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

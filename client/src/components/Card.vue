@@ -3,7 +3,6 @@
   <b-card
         :title="title"
         :sub-title="period"
-        style="max-width: 20rem;"
         class="mb-2"
         v-b-modal="modalName"
     >

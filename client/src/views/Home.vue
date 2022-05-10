@@ -12,17 +12,36 @@
     
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
-        <b-tab title="Formations" active>
-          <div v-for="experience in user.experiences" :key="experience.id" class="px-3 py-2">
-            <Card :modalName="experience.title" :title="experience.title" :period="experience.from" :description="experience.description" />
-          </div>
+        <b-tab title="Experiences" active>
+          <draggable
+            class="list-group"
+            tag="div"
+            v-model="user.experiences"
+            v-bind="dragOptions"
+            @start="drag = true"
+            @end="drag = false"
+          >
+            <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+              <Card v-for="experience in user.experiences" :key="experience.title" :modalName="experience.title" :title="experience.title" :period="experience.from" :description="experience.description" class="px-3 py-2" />
+            </transition-group>
+          </draggable>
+
           <!-- <AddCard /> -->
         </b-tab>
 
-        <b-tab title="Experiences">
-          <div v-for="formation in user.formations" :key="formation.id" class="px-3 py-2">
-            <Card :modalName="formation.name" :title="formation.name" :period="formation.from" :description="formation.description" />
-          </div>
+        <b-tab title="Formations">
+          <draggable
+            class="list-group"
+            tag="div"
+            v-model="user.formations"
+            v-bind="dragOptions"
+            @start="drag = true"
+            @end="drag = false"
+          >
+            <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+              <Card v-for="formation in user.formations" :key="formation.school" :modalName="formation.name" :title="formation.name" :period="formation.from" :description="formation.description" class="px-3 py-2" />
+            </transition-group>
+          </draggable>
         </b-tab>
       </b-tabs>
       
@@ -38,7 +57,7 @@ import Navbar from '/src/components/Navbar.vue'
 import Card from '/src/components/Card.vue'
 import AddCard from '/src/components/AddCard.vue'
 import json from "/src/json/test.json";
-
+import draggable from "vuedraggable";
 
 export default {
   components: {
@@ -46,16 +65,27 @@ export default {
     Navbar,
     Card,
     AddCard,
-    ResumeStandard
+    ResumeStandard,
+    draggable
   },
   name: 'Accueil',
   props: ['name'],
   data() {
     return {
+      drag: false,
       user: json,
     };
   },
-
+  computed: {
+    dragOptions() {
+      return {
+        animation: 200,
+        group: "description",
+        disabled: false,
+        ghostClass: "ghost"
+      };
+    }
+  },
 }
 </script>
 
