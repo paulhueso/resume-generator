@@ -82,7 +82,7 @@ export default {
 			console.log("Granted")
 		} else {
 			console.log("Unauthorized");
-			}
+				}
 			});
 		},
 	}
@@ -94,7 +94,6 @@ export default {
 <style scoped>
 	#navbar {
 		top: 0%
-
 	}
 
 	* {
