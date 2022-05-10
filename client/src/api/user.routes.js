@@ -60,6 +60,13 @@ module.exports = class Api{
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
+    static async logout(){
+        return new Promise(function(resolve){
+					axios.get("http://localhost:3000/api/logout")
+						.then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
 
     static async fetchCVs(){
         return new Promise(function(resolve) {
