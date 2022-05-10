@@ -6,7 +6,7 @@
         //////////////////////////////////// DOSSIER TECHNIQUE
       </p>
       <p class="page_1_name">
-        /////////////////////////// MONSIEUR {{ user.firstname }}
+        /////////////////////////// MONSIEUR {{ user.firstname }} 
         {{ user.surname }}
       </p>
       <p class="page_1_ent">
@@ -76,13 +76,20 @@
 
 <script>
 import json from "/src/json/test.json";
+const axios = require('axios').default;
 export default {
+
+  props : ['Cv_Id'],
   data() {
     return {
-      user: json,
+      user: json, //a supp
+      user2:axios.get("http://localhost:3000/api/cv/",{  params: { id: this.Cv_Id }   })
     };
   },
+ 
+  
 };
+
 </script>
 
 <style >

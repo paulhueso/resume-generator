@@ -46,7 +46,7 @@ export default {
 		.then(res => {
 		console.log(res);
 		if(res.status == 200) {
-			this.$router.push({ name: 'Home'});
+			this.$router.push({ name: 'Dashboard'});
 			console.log("Granted")
 		} else {
 			console.log("Unauthorized");

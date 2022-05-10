@@ -11,7 +11,7 @@ import Register from './views/Register.vue'
 import Home from './views/Home.vue'
 import NotFound from './views/NotFound.vue'
 import Profile from './views/Profile.vue'
-
+import Dashboard from './views/Dashboard.vue'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -30,7 +30,7 @@ const router = new VueRouter({
       name: 'Register'
     },
     {
-      path: "/home",
+      path: "/home/:id",
       component: Home,
       name: 'Home'
     },
@@ -38,6 +38,11 @@ const router = new VueRouter({
       path: "/profile",
       component: Profile,
       name: 'Profile'
+    },
+    {
+      path: "/dashboard",
+      component: Dashboard,
+      name: 'Dashboard'
     },
     {
       path: "/:pathMatch(.*)*",

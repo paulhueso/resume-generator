@@ -30,4 +30,6 @@ module.exports = class Api{
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
+ 
+
 }
