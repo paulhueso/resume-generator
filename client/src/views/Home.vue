@@ -103,12 +103,6 @@ body {
   color: #000000
 }
 
-.accueilclasse{
-  margin-top: 5%;
-  text-align: center;
-  color: #03045E;
-}
-
 .logo{
   display: block;
   margin-left: auto;
@@ -117,7 +111,6 @@ body {
 
 #navbar {
   top: 0%
-
 }
 
 
