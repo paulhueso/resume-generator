@@ -70,8 +70,12 @@ module.exports = class UserService{
                 'tel' : data.phone,
                 'cv_list' : data.cv_list || []
             }
-           const response = await new User(newUser).save();
-           return response;
+            const res = await User.findOne({mail: data.mail});
+            if(!res){
+                const response = await new User(newUser).save();
+                return response;
+            }
+            else return null
         } catch (error) {
             console.log(error);
         } 

@@ -88,7 +88,12 @@ module.exports = class User{
       try {
          let user = req.body || {};
          const createdUser = await UserService.createUser(user);
-         res.json(createdUser);
+         if(createdUser){
+            res.status(200).json(createdUser);
+         }
+         else{
+            res.status(401).json("Email's already used.");
+         }
       } catch (error) {
          res.status(500).json({error: error})
       }
