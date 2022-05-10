@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="action">
-      <button @click="profileUser(mailInput, passwordInput, nameInput, firstnameInput,address,tel,current_organization )">Sauvegarder</button>
+      <button @click="profileUser(mailInput, passwordInput, nameInput, firstnameInput, address, tel, current_organization )">Sauvegarder</button>
       <button @click="Annuler()">Annuler</button>
     </div>
   </form>
@@ -66,22 +66,23 @@ export default {
 			address: json.address,
 			tel: json.tel,
 			current_organization:json.current_organization,
+    	};
+  	},
 
-    };
-  },
 	methods: {
+
 		Annuler: function () {
 			this.$router.push({ name: 'Home'})
-    },
+    	},
+
 		profileUser: function (mailInput, passwordInput, nameInput, firstnameInput,address,tel,current_organization ) {
-		Api.edit_profile(mailInput, passwordInput, nameInput, firstnameInput,address,tel,current_organization )
-		.then(res => {
-			console.log(res);
-		if(res.status == 200) {
-			this.$router.push({ name: 'Home'});
-			console.log("Granted")
-		} else {
-			console.log("Unauthorized");
+			Api.edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel, current_organization)
+			.then(res => {
+				if(res.status == 200) {
+					this.$router.push({ name: 'Home'});
+					console.log("Granted")
+				} else {
+					console.log("Unauthorized");
 				}
 			});
 		},
@@ -92,123 +93,123 @@ export default {
 </script>
 
 <style scoped>
-	#navbar {
-		top: 0%
-	}
+#navbar {
+	top: 0%
+}
 
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		-webkit-font-smoothing: antialiased;
-	}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+}
 
-	body {
-		background: #ADE8F4;
-		font-family: 'Rubik', sans-serif;
-	}
+body {
+	background: #ADE8F4;
+	font-family: 'Rubik', sans-serif;
+}
 
-	.profile-form {
-		background: #fff;
-		width: 750px;
-		margin: 130px auto;
-		display: -webkit-box;
-		display: flex;
-		-webkit-box-orient: vertical;
-		-webkit-box-direction: normal;
-		flex-direction: column;
-		border-radius: 4px;
-		box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
-	}
-	.profile-form h1 {
-		padding: 35px 35px 0 35px;
-		font-weight: 300;
-		text-align: center;
-	}
-	.profile-form .content {
-		padding: 35px;
-		text-align: center;
-	}
-	.profile-form .input-field {
-		padding: 12px 5px;
-	}
-	.profile-form .input-field input {
-		font-size: 16px;
-		display: block;
-		font-family: 'Rubik', sans-serif;
-		width: 100%;
-		padding: 10px 1px;
-		border: 0;
-		border-bottom: 1px solid #747474;
-		outline: none;
-		-webkit-transition: all .2s;
-		transition: all .2s;
-	}
-	.profile-form .input-field input::-webkit-input-placeholder {
-		text-transform: uppercase;
-	}
-	.profile-form .input-field input::-moz-placeholder {
-		text-transform: uppercase;
-	}
-	.profile-form .input-field input:-ms-input-placeholder {
-		text-transform: uppercase;
-	}
-	.profile-form .input-field input::-ms-input-placeholder {
-		text-transform: uppercase;
-	}
-	.profile-form .input-field input::placeholder {
-		text-transform: uppercase;
-	}
-	.profile-form .input-field input:focus {
-		border-color: #222;
-	}
-	.profile-form a.link {
-		text-decoration: none;
-		color: #747474;
-		letter-spacing: 0.2px;
-		text-transform: uppercase;
-		display: inline-block;
-		margin-top: 20px;
-	}
-	.profile-form .action {
-		display: -webkit-box;
-		display: flex;
-		-webkit-box-orient: horizontal;
-		-webkit-box-direction: normal;
-		flex-direction: row;
-	}
-	.profile-form .action button {
-		width: 100%;
-		border: none;
-		padding: 18px;
-		font-family: 'Rubik', sans-serif;
-		cursor: pointer;
-		text-transform: uppercase;
-		background: #caf0f8;
-		color: #03045e;
-		border-bottom-left-radius: 4px;
-		border-bottom-right-radius: 0;
-		letter-spacing: 0.2px;
-		outline: 0;
-		-webkit-transition: all .3s;
-		transition: all .3s;
-	}
-	.profile-form .action button:hover {
-		background: #d8d8d8;
-	}
-	.profile-form .action button:nth-child(2) {
-		background: #03045e;
-		color: #caf0f8;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 4px;
-	}
-	.profile-form .action button:nth-child(2):hover {
-		background: #caf0f8;
-		color: #03045e;
-	}
-	.logo{
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
+.profile-form {
+	background: #fff;
+	width: 750px;
+	margin: 130px auto;
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	border-radius: 4px;
+	box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
+}
+.profile-form h1 {
+	padding: 35px 35px 0 35px;
+	font-weight: 300;
+	text-align: center;
+}
+.profile-form .content {
+	padding: 35px;
+	text-align: center;
+}
+.profile-form .input-field {
+	padding: 12px 5px;
+}
+.profile-form .input-field input {
+	font-size: 16px;
+	display: block;
+	font-family: 'Rubik', sans-serif;
+	width: 100%;
+	padding: 10px 1px;
+	border: 0;
+	border-bottom: 1px solid #747474;
+	outline: none;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+}
+.profile-form .input-field input::-webkit-input-placeholder {
+	text-transform: uppercase;
+}
+.profile-form .input-field input::-moz-placeholder {
+	text-transform: uppercase;
+}
+.profile-form .input-field input:-ms-input-placeholder {
+	text-transform: uppercase;
+}
+.profile-form .input-field input::-ms-input-placeholder {
+	text-transform: uppercase;
+}
+.profile-form .input-field input::placeholder {
+	text-transform: uppercase;
+}
+.profile-form .input-field input:focus {
+	border-color: #222;
+}
+.profile-form a.link {
+	text-decoration: none;
+	color: #747474;
+	letter-spacing: 0.2px;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-top: 20px;
+}
+.profile-form .action {
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	flex-direction: row;
+}
+.profile-form .action button {
+	width: 100%;
+	border: none;
+	padding: 18px;
+	font-family: 'Rubik', sans-serif;
+	cursor: pointer;
+	text-transform: uppercase;
+	background: #caf0f8;
+	color: #03045e;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 0;
+	letter-spacing: 0.2px;
+	outline: 0;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.profile-form .action button:hover {
+	background: #d8d8d8;
+}
+.profile-form .action button:nth-child(2) {
+	background: #03045e;
+	color: #caf0f8;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 4px;
+}
+.profile-form .action button:nth-child(2):hover {
+	background: #caf0f8;
+	color: #03045e;
+}
+.logo{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
