@@ -1,14 +1,10 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" />
+    <Navbar id="navbar" @saveResume="saveResume" />
   </header>
 
   <body>
-    <!-- <h1 class = "accueilclasse"> Sea V generator: do it whale</h1> -->
-    <!-- <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F559809%2Fscreenshots%2F1672971%2Fwhale_logo.jpg&f=1&nofb=1" width="200" height="150" class = "logo"> -->
-    <!-- <p>{{name}}</p> -->
-    <!-- <ResumeStandard :user="user" /> -->
     <Lecture :user="user"/>
 
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
@@ -63,6 +59,10 @@ export default {
       this.user.cv_list[0].experiences[id].period = period; 
       this.user.cv_list[0].experiences[id].description = description;
     },
+
+    saveResume() {
+      Api.saveResume(this.user.cv_list[0]);
+    }
   }
 
 }

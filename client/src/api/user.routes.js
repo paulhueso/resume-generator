@@ -10,7 +10,7 @@ module.exports = class Api{
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                  },
+                },
             })
             .then(res => resolve(res))
             .catch(err => alert(`Cannot log in : ${err}`));
@@ -24,7 +24,20 @@ module.exports = class Api{
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                  },
+                },
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+
+    static async saveResume(resume, id){
+        return new Promise(function(resolve){
+            axios.patch(`http://localhost:3000/api/cv/${id}`, resume, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
             })
             .then(res => resolve(res))
             .catch(err => console.log(`Cannot reach server : ${err}`));
