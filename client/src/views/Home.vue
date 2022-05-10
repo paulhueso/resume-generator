@@ -5,12 +5,12 @@
   </header>
 
   <body>
-    <Lecture :user="user"/>
+    <Lecture :resume="resume" />
 
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
         <b-tab title="Formations" active>
-          <div v-for="(experience, index) in user.cv_list[0].experiences" :key="index" class="px-3 py-2">
+          <div v-for="(experience, index) in resume.experiences" :key="index" class="px-3 py-2">
             <CardExperience 
               :modalName="experience.title" 
               :title="experience.title" 
@@ -23,7 +23,7 @@
         </b-tab>
 
         <b-tab title="Experiences">
-          <div v-for="(formation, index) in user.cv_list[0].formations" :key="index" class="px-3 py-2">
+          <div v-for="(formation, index) in resume.formations" :key="index" class="px-3 py-2">
             <CardFormation 
               :modalName="formation.name" 
               :title="formation.name" 
@@ -67,28 +67,26 @@ export default {
   props: ['name'],
   data() {
     return {
-      
-      user:json, 
-
+      resume: json.cv_list[0]
     };
   },
   methods: {
 
     updateExperience(title, period, description, id) {
-      this.user.cv_list[0].experiences[id].title = title; 
-      this.user.cv_list[0].experiences[id].period = period; 
-      this.user.cv_list[0].experiences[id].description = description;
+      this.resume.experiences[id].title = title; 
+      this.resume.experiences[id].period = period; 
+      this.resume.experiences[id].description = description;
     },
 
     updateFormation(name, period, description, id) {
       console.log("hey")
-      this.user.cv_list[0].formations[id].name = name; 
-      this.user.cv_list[0].formations[id].period = period; 
-      this.user.cv_list[0].formations[id].description = description;
+      this.resume.formations[id].name = name; 
+      this.resume.formations[id].period = period; 
+      this.resume.formations[id].description = description;
     },
 
     saveResume() {
-      Api.saveResume(this.user.cv_list[0]);
+      Api.saveResume(this.resume);
     }
   }
 

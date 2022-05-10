@@ -48,6 +48,14 @@ export default {
 		if(res.status == 200) {
 			this.$router.push({ name: 'Dashboard'});
 			console.log("Granted")
+			localStorage.user = JSON.stringify({
+				"firstname": "Paul",
+				"surname" : "Hueso",
+				"address" : "5 rue Gustave Crauk",
+				"mail" : "paul.hueso@gmail.com",
+				"tel" : "0603861269",
+				"current_organization":"Super Organization",
+			})
 		} else {
 			console.log("Unauthorized");
 		}

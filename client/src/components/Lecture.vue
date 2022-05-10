@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div v-for="exp in user.cv_list[0].experiences" :key="exp.organization">
+    <div v-for="exp in resume.experiences" :key="exp.organization">
       <div class="paper">
         <p class="page_title"><b>Experiences</b></p>
         <div class="experiences">
@@ -49,7 +49,7 @@
       <p class="page_title_2"><b>Formations</b></p>
       <div
         class="formations"
-        v-for="exp in user.cv_list[0].formations"
+        v-for="exp in resume.formations"
         :key="exp.school"
       >
         <p class="page_3_exp">
@@ -80,8 +80,16 @@ import json from "/src/json/test.json";
 
 export default {
   props : [
-    'user'
-  ]
+    'resume'
+  ],
+  data() {
+    return {
+      user: {}
+    };
+  },
+  mounted(){
+    if(localStorage.user) this.user = JSON.parse(localStorage.user);  
+  }
 };
 
 </script>
