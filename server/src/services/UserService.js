@@ -41,15 +41,6 @@ module.exports = class UserService{
         }
     }
 
-    static async getAllCVs(){
-        try {
-            const allCVs = Cv.find();
-            return allCVs;
-        } catch (error) {
-            console.log(`Could not fetch cvs ${error}`);
-        }
-    }
-
     static async getUserById(userId){
         try {
             const singleUser =  await User.findById({_id: userId});
@@ -80,21 +71,6 @@ module.exports = class UserService{
                 'cv_list' : data.cv_list || []
             }
            const response = await new User(newUser).save();
-           return response;
-        } catch (error) {
-            console.log(error);
-        } 
-    }
-
-    static async createCV(data){
-        try {
-            const newCV = {
-                'titre': 'CV n°1',
-                'type' : 1,
-                'experiences' : [{}],
-                'formations' : [{}]
-            }
-           const response = await new Cv(newCV).save();
            return response;
         } catch (error) {
             console.log(error);

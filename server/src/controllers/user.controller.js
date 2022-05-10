@@ -23,6 +23,11 @@ module.exports = class User{
       }
    }
 
+   static async apiisLoggedIn(req,res){
+      if(req.session.isAuthentificated) res.status(200).json("You are logged in");
+      else res.status(401).json("You aren't logged in");
+   }
+
    static async apiGetUser(req,res){
       try {
             if(req.session.isAuthentificated){

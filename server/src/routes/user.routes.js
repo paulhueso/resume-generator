@@ -9,6 +9,8 @@ router.get('/api/all/users/', UserController.apiGetAllUsers);
 /* GET USER */
 router.get('/api/user/', UserController.apiGetUser);
 
+router.get('/api/user/auth',UserController.apiisLoggedIn)
+
 /* CREATE A NEW USER */
 router.post('/api/register/', UserController.apiCreateUser);
 
