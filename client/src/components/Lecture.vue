@@ -6,7 +6,7 @@
         //////////////////////////////////// DOSSIER TECHNIQUE
       </p>
       <p class="page_1_name">
-        /////////////////////////// MONSIEUR {{ user.firstname }}
+        /////////////////////////// MONSIEUR {{ user.firstname }} 
         {{ user.surname }}
       </p>
       <p class="page_1_ent">
@@ -76,13 +76,19 @@
 
 <script>
 import json from "/src/json/test.json";
+
 export default {
+
+ 
   data() {
     return {
-      user: json,
+      user: json, //a supp
     };
   },
+ 
+  
 };
+
 </script>
 
 <style >

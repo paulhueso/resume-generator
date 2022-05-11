@@ -30,4 +30,33 @@ module.exports = class Api{
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
+
+    static async list_CV(){
+        return new Promise(function(resolve) {
+            axios.get("http://localhost:3000/api/cvs", {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+            })
+            .then(CVS => resolve(CVS))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+
+    static async newCV(titreCV){
+        return new Promise(function(resolve){
+            let data = {titre: titreCV};
+            axios.post("http://localhost:3000/api/cv", data, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                  },
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+ 
+
 }
