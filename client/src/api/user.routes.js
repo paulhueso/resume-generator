@@ -108,7 +108,7 @@ module.exports = class Api{
     static async edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel){
         return new Promise(function(resolve){
             let data = {mail: mailInput, lastname: nameInput, firstname: firstnameInput, password: passwordInput, address: address, phone: tel};
-            axios.post("http://localhost:3000/api/user/update", data, {
+            axios.patch("http://localhost:3000/api/user/update", data, {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",

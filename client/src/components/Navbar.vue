@@ -33,6 +33,7 @@ export default {
     Logout: async function () {
       Api.logout()
       .then(res => {
+        console.log(res);
       if(res.status == 200) {
         this.$router.push({ name: 'Login'});
       } 
