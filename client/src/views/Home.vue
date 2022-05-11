@@ -49,7 +49,6 @@
           />
         </b-tab>
       </b-tabs>
-      
     </b-sidebar>
   </body>
 </div>
@@ -81,7 +80,7 @@ export default {
     return {
       resume: {},
       idResume: '',
-      user: {}
+      user: {},
     };
   },
   methods: {
@@ -99,7 +98,24 @@ export default {
     },
 
     async saveResumeBDD() {
-      Api.saveResumeBDD();
+      Api.saveResumeBDD().then(res => {
+        console.log(res)
+        if(res.status == 304 || res.status == 200){
+          this.$toast.open({
+            message: "Resume saved !",
+            type: "success",
+            duration: 5000,
+            dismissible: true
+          })
+        } else {
+          this.$toast.open({
+            message: "Error, could not be saved !",
+            type: "error",
+            duration: 5000,
+            dismissible: true
+          })
+        }
+      });
     },
 
     createNewExperience(title, period, description) {
@@ -111,7 +127,7 @@ export default {
       Api.saveResumeSession(this.resume, this.idResume);
     },
 
-    createNewFormation(title, period, description) {
+    async createNewFormation(title, period, description) {
       this.resume.formations.push({
         name: title,
         period: period,
@@ -145,7 +161,7 @@ export default {
 body {
   background: #ade8f4;
   font-family: 'Rubik', sans-serif;
-  color: #000000
+  color: #000000;
 }
 
 .logo{

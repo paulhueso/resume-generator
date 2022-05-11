@@ -43,7 +43,9 @@ export default {
       this.$emit('saveResume')
     }
   },
-  props: ['isHomePage']
+  props: [
+    'isHomePage',
+  ]
 
 }
 
