@@ -41,18 +41,18 @@ export default {
 		CVS:{} , //a supp
 		//CVS:json,
 		
-    };
-  },
-	methods: {
-    createNewCV(titre) {
-		this.CVS.cv_list.push({
-			titre: titre,
-			});
-		Api.NewCV(titre);
-	},
+	};
 },
+	methods: {
+		createNewCV(titre) {
+			this.CVS.cv_list.push({
+				titre: titre,
+				});
+			Api.newCV(titre);
+		},
+	},
 	mounted(){
-    Api.List_CV().then(CVS => this.CVS= CVS)
+		Api.list_CV().then(CVS => this.CVS= CVS)
 	}
 }
 </script>
