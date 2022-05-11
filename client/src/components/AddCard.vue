@@ -1,11 +1,10 @@
 <template>
 <div>
   <b-card
-    overlay
-    img-src="https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0="
-    style="max-width: 20rem; max-height: 3rem;"
     class="mb-2"
     v-b-modal="modalName"
+    title="+"
+    align="center"
   >
     </b-card>
 
@@ -13,7 +12,7 @@
       :id="modalName"
       size="lg"
       ref="modal"
-      title="Edit informations"
+      title="Add formation"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
@@ -22,13 +21,12 @@
         <b-form-group
           label="Experience"
           label-for="title"
-          invalid-feedback="Complete all infos"
-          :state="nameState"
+          invalid-feedback="Title is required"
+          :state="titleState"
         >
             <b-form-input
                 id="title"
                 v-model="title"
-                :state="nameState"
                 required
             ></b-form-input>
         </b-form-group>
@@ -36,14 +34,10 @@
         <b-form-group
           label="Periode de travail"
           label-for="period"
-          invalid-feedback="Complete all infos"
-          :state="nameState"
         >
             <b-form-input
                 id="period"
                 v-model="period"
-                :state="nameState"
-                required
             ></b-form-input>
         </b-form-group>
 
@@ -51,15 +45,12 @@
         <b-form-group
             label="Description"
             label-for="description"
-            invalid-feedback="Complete all infos"
-            :state="nameState"
         >
-            <b-form-input
+            <b-form-textarea
                 id="description"
                 v-model="description"
-                :state="nameState"
-                required
-            ></b-form-input>
+                rows="8"
+            ></b-form-textarea>
         </b-form-group>
       </form>
     </b-modal>
@@ -69,25 +60,31 @@
 
 <script>
 export default {
-    props : ['modalName'],
+    props : [
+      'modalName',
+      'isExperience',
+      'createNewExperience',
+      'createNewFormation'
+    ],
     data() {
       return {
         title: '',
         period: '',
         description: '',
-        nameState: null,
-        submittedNames: []
+        titleState: null
       }
     },
     methods: {
       checkFormValidity() {
         const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
+        this.titleState = valid
+        return valid;
       },
       resetModal() {
-        this.name = ''
-        this.nameState = null
+        this.title = ''
+        this.period = ''
+        this.description = ''
+        this.titleState = null
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing
@@ -96,15 +93,14 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
-        // Push the name to submitted names
-        this.submittedNames.push(this.name)
+        if(!this.checkFormValidity()) return
+
+        if(this.isExperience) this.$emit('createNewExperience', this.title, this.period, this.description)
+        else this.$emit('createNewFormation', this.title, this.period, this.description)
+
         // Hide the modal manually
         this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
+          this.$refs['modal'].hide()
         })
       }
     }

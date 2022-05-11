@@ -80,16 +80,9 @@ import json from "/src/json/test.json";
 
 export default {
   props : [
-    'resume'
+    'resume',
+    'user'
   ],
-  data() {
-    return {
-      user: {}
-    };
-  },
-  mounted(){
-    if(localStorage.user) this.user = JSON.parse(localStorage.user);  
-  }
 };
 
 </script>

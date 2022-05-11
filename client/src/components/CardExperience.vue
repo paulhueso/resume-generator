@@ -24,6 +24,8 @@
         <b-form-group
           label="Experience"
           label-for="title"
+          invalid-feedback="Title is required"
+          :state="titleState"
         >
           <b-form-input
               id="title"
@@ -39,7 +41,6 @@
           <b-form-input
               id="period"
               v-model="periodInput"
-              required
           ></b-form-input>
         </b-form-group>
 
@@ -47,16 +48,27 @@
         <b-form-group
             label="Description"
             label-for="description"
-            invalid-feedback="Complete all infos"
         >
           <b-form-textarea
               id="description"
               v-model="descriptionInput"
-              required
               rows="8"
           ></b-form-textarea>
         </b-form-group>
       </form>
+      <template #modal-footer="{ ok, cancel }">
+        <!-- Emulate built in modal footer ok and cancel button actions -->
+        <b-button variant="danger" @click="handleDelete()" >
+          Delete
+        </b-button>
+        <b-button variant="secondary" @click="cancel()">
+          Cancel
+        </b-button>
+        <b-button variant="primary" @click="ok()">
+          OK
+        </b-button>
+        <!-- Button with custom close trigger value -->
+      </template>
     </b-modal>
 
 </div>
@@ -69,21 +81,27 @@ export default {
         'title',
         'period',
         'description',
-        'updateExperience',
-        'index'
+        'index',
     ],
     data() {
       return {
         titleInput: this.title,
         periodInput: this.period,
         descriptionInput: this.description,
-        nameState: null,
+        titleState: null,
       }
     },
     methods: {
+      checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.titleState = valid
+        return valid;
+      },
       resetModal() {
-        this.name = ''
-        this.nameState = null
+        this.titleInput = this.title
+        this.periodInput = this.period
+        this.descriptionInput = this.description
+        this.titleState = null
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing
@@ -92,12 +110,23 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
+        if(!this.checkFormValidity()) return
+
         this.$emit('updateExperience', this.titleInput, this.periodInput, this.descriptionInput, this.index)
 
         // Hide the modal manually
         this.$nextTick(() => {
           this.$refs['modal'].hide()
         })
+      },
+      handleDelete() {
+ 
+        this.$nextTick(() => {
+          this.$refs['modal'].hide()
+        })
+
+        this.$emit('deleteExperience', this.index);
+        
       }
     }
 }
