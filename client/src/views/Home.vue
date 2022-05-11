@@ -1,11 +1,33 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" @saveResume="saveResumeBDD" :isHomePage="true" />
+    <Navbar id="navbar" @saveResume="saveResumeBDD" :isHomePage="true" @generatePDF="generateReport" />
   </header>
 
   <body>
-    <Lecture :resume="resume" :user="user" />
+     <vue-html2pdf
+        :show-layout="false"
+        :float-layout="true"
+        :enable-download="true"
+        :preview-modal="false"
+        :paginate-elements-by-height="1000"
+        filename="Cv"
+        :pdf-quality="2"
+        :manual-pagination="true"
+        pdf-format="a4"
+        pdf-orientation="portrait"
+        pdf-content-width="800px"
+        
+        @progress="onProgress($event)"
+        @hasStartedGeneration="hasStartedGeneration()"
+        @hasGenerated="hasGenerated($event)"
+        ref="html2Pdf"
+    >
+        <section slot="pdf-content">
+          <Lecture :resume="resume" :user="user" margin_="margin: 0 auto 0 auto !important"/>
+        </section>
+    </vue-html2pdf>
+    <Lecture :resume="resume" :user="user" margin_="margin: 5% auto 2% auto !important"/>
     <b-sidebar id="sidebar-1" title="Informations" width='20%' right shadow>
       <b-tabs content-class="mt-3">
         <b-tab title="Experiences" active>
@@ -62,8 +84,7 @@ import CardExperience from '/src/components/CardExperience.vue'
 import CardFormation from '/src/components/CardFormation.vue'
 import AddCard from '/src/components/AddCard.vue'
 const Api = require("../api/user.routes");
-
-
+import VueHtml2pdf from 'vue-html2pdf'
 
 export default {
   components: {
@@ -72,19 +93,22 @@ export default {
     CardExperience,
     CardFormation,
     AddCard,
-    ResumeStandard
+    ResumeStandard,
+    VueHtml2pdf
   
   },
   name: 'Accueil',
   data() {
     return {
-      resume: {},
       idResume: '',
       user: {},
+      resume:{},
     };
   },
   methods: {
-
+    generateReport () {
+      this.$refs.html2Pdf.generatePdf()
+    },
     updateExperience(title, period, description, id) {
       this.resume.experiences[id].title = title; 
       this.resume.experiences[id].period = period; 
@@ -148,6 +172,7 @@ export default {
       Api.saveResumeSession(this.resume, this.idResume);
     }
   },
+
 
   mounted() {
     this.idResume = this.$route.params.id;
