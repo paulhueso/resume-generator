@@ -21,7 +21,7 @@ module.exports = class Api{
 
     static async register(mailInput, passwordInput, nameInput, firstnameInput){
         return new Promise(function(resolve){
-            let data = {mail: mailInput, name: nameInput, firstname: firstnameInput, password: passwordInput};
+            let data = {mail: mailInput, lastname: nameInput, firstname: firstnameInput, password: passwordInput};
             axios.post("http://localhost:3000/api/register", data, {
                 headers: {
                     Accept: "application/json",
@@ -104,6 +104,34 @@ module.exports = class Api{
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
+
+    static async user(){
+        return new Promise(function(resolve) {
+            axios.get("http://localhost:3000/api/user/", {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+            })
+            .then(user => resolve(user))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+
+    static async edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel){
+        return new Promise(function(resolve){
+            let data = {mail: mailInput, lastname: nameInput, firstname: firstnameInput, password: passwordInput, address: address, phone: tel};
+            axios.post("http://localhost:3000/api/user/update", data, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                  },
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+    
  
     static async fetchCVById(id){
         return new Promise(function(resolve) {

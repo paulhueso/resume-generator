@@ -34,14 +34,11 @@
         <input type="tel" placeholder="Tel" pattern="[0][0-9]{9}" v-model="tel">
       </div>
        <div class="input-field">
-        <input type="text" placeholder="Entreprise Actuelle"  v-model="current_organization">
-      </div>
-       <div class="input-field">
         <input type="password" placeholder="Nouveau Mot de passe" autocomplete="new-password" v-model="passwordInput">
       </div>
     </div>
     <div class="action">
-      <button @click="profileUser(mailInput, passwordInput, nameInput, firstnameInput, address, tel, current_organization )">Sauvegarder</button>
+      <button @click="profileUser(mailInput, passwordInput, nameInput, firstnameInput, address, tel)">Sauvegarder</button>
       <button @click="Annuler()">Annuler</button>
     </div>
   </form>
@@ -58,28 +55,38 @@ export default {
      
 	data() {
 		return {
-			user: {},
-			mailInput: '',
-			nameInput: '',
-			passwordInput: '',
-			firstnameInput: '',
-			address: '',
-			tel: '',
-			current_organization: '',
-    	};
-  	},
+			user:{},
+		};
+	},
 
+	computed: {
+    mailInput() {
+			return this.user.mail;
+    },
+		nameInput() {
+			return this.user.surname;
+    },
+		firstnameInput() {
+      return this.user.firstname;
+    },
+		address() {
+      return this.user.address;
+    },
+		tel() {
+      return this.user.tel;
+    }
+},
 	methods: {
 
 		Annuler: function () {
-			this.$router.push({ name: 'Home'})
-    	},
+			this.$router.push({ name: 'Dashboard'})
+		},
 
-		profileUser: function (mailInput, passwordInput, nameInput, firstnameInput,address,tel,current_organization ) {
-			Api.edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel, current_organization)
+		profileUser: function (mailInput, passwordInput, nameInput, firstnameInput,address,tel) {
+			Api.edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel)
 			.then(res => {
 				if(res.status == 200) {
-					this.$router.push({ name: 'Home'});
+					this.$router.push({ name: 'Dashboard'});
 					console.log("Granted")
 				} else {
 					console.log("Unauthorized");
@@ -87,16 +94,10 @@ export default {
 			});
 		},
 	},
-	
+
 	mounted(){
-    	if(localStorage.user) this.user = JSON.parse(localStorage.user);  
-		this.mailInput = this.user.mail;
-		this.firstnameInput = this.user.firstname;
-		this.nameInput = this.user.surname;
-		this.address = this.user.address;
-		this.tel = this.user.tel;
-		this.current_organization = this.user.current_organization;
-  	}
+		Api.user().then(user => this.user= user)
+	}
 };
 
 
