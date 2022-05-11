@@ -57,26 +57,15 @@ export default {
 	data() {
 		return {
 			user:{},
+			tel:"",
+			address:"",
+			firstnameInput:"",
+			nameInput:"",
+			mailInput:""
 		};
 	},
 
-	computed: {
-    mailInput() {
-			return this.user.mail;
-    },
-		nameInput() {
-			return this.user.surname;
-    },
-		firstnameInput() {
-			return this.user.firstname;
-    },
-		address() {
-			return this.user.address;
-    },
-		tel() {
-			return this.user.tel;
-    }
-},
+
 	methods: {
 
 		Annuler: function () {
@@ -94,7 +83,12 @@ export default {
 	},
 
 	mounted(){
-		Api.user().then(user => this.user= user)
+		Api.user().then(user => this.user = user)
+		this.tel=this.user.tel;
+		this.address=this.user.address;
+		this.firstnameInput=this.user.firstname;
+		this.nameInput=this.user.surname;
+		this.mailInput=this.user.mail;
 	}
 };
 

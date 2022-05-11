@@ -24,7 +24,6 @@ module.exports = class Api{
             let data = {mail: mailInput, lastname: nameInput, firstname: firstnameInput, password: passwordInput};
             axios.post("http://localhost:3000/api/register", data, {
                 headers: {
-                    withCredentials: true,
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
@@ -80,7 +79,6 @@ module.exports = class Api{
         return new Promise(function(resolve) {
             axios.get("http://localhost:3000/api/cvs", {
                 headers: {
-                    withCredentials: true,
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
@@ -96,7 +94,6 @@ module.exports = class Api{
             let data = {title: titleCV};
             axios.get("http://localhost:3000/api/user/cv", data, {
                 headers: {
-                    withCredentials: true,
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
@@ -112,10 +109,10 @@ module.exports = class Api{
         return new Promise(function(resolve) {
             axios.get("http://localhost:3000/api/user/", {
                 headers: {
-                    withCredentials: true,
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
+                withCredentials: true
             })
             .then(user => resolve(user))
             .catch(err => console.log(`Cannot reach server : ${err}`));
@@ -127,10 +124,10 @@ module.exports = class Api{
             let data = {mail: mailInput, lastname: nameInput, firstname: firstnameInput, password: passwordInput, address: address, phone: tel};
             axios.post("http://localhost:3000/api/user/update", data, {
                 headers: {
-                    withCredentials: true,
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                   },
+                  withCredentials: true
             })
             .then(res => resolve(res))
             .catch(err => console.log(`Cannot reach server : ${err}`));
