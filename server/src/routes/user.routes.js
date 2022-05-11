@@ -14,6 +14,9 @@ router.get('/api/user/auth',UserController.apiisLoggedIn)
 /* CREATE A NEW USER */
 router.post('/api/register/', UserController.apiCreateUser);
 
+/* PATCH CURRENT USER */
+router.patch('/api/user/update',UserController.apiPatchUser);
+
 /* GET A USER BY ID */
 router.get('/api/users/id/:id', UserController.apiGetUserById);
 
