@@ -11,6 +11,26 @@ module.exports = class CvService{
         }
     }
 
+    static async saveCVsInBDD(cv){
+        try {
+            const response = await Cv.findOneAndReplace(
+                {
+                    "_id":cv._id
+                }
+                ,
+                {
+                    "_id":cv.id,
+                    "titre": cv.titre,
+                    "type": cv.type,
+                    "experiences": cv.experiences,
+                    "formations": cv.formations
+            });
+            return response;
+        } catch (error) {
+            console.log(`Error saving in database: ${error}`);
+        }
+    }
+
     static async createCV(data){
         try {
             const newCV = {

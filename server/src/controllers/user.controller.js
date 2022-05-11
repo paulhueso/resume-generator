@@ -28,6 +28,26 @@ module.exports = class User{
       else res.status(401).json("You aren't logged in");
    }
 
+   static async apiPatchUser(req,res){
+      try{
+            if(req.session.isAuthentificated){
+               const data = req.body;
+               const user = req.session.user;
+               const result = await UserService.updateUser(user,data,req.session);
+               if(!result) res.status(500).json("Error while updating");
+               else {
+                  res.status(200).json("User updated");
+               }
+            }
+            else{
+                  res.status(401).json("Unauthorized");
+               }
+      }
+      catch (error) {
+         res.status(500).json({error: error})
+      }
+   }
+
    static async apiGetUser(req,res){
       try {
             if(req.session.isAuthentificated){

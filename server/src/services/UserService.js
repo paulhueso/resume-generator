@@ -59,6 +59,30 @@ module.exports = class UserService{
         }
     }
 
+    static async updateUser(user,data,session){
+        try {
+            if(data.password){
+                data.password = bcrypt.hashSync(data.password, 10);
+            }
+            const updatedUser = {
+                '_id': user._id,
+                'firstname': data.firstname || user.firstname,
+                'surname' : data.surname || user.surname,
+                'address' : data.address || user.address,
+                'mail' : data.mail || user.mail,
+                'password' : data.password || user.password,
+                'tel' : data.phone || user.tel,
+                'cv_list' : user.cv_list
+            }
+            const resp = await User.findOneAndReplace({_id: user._id},updatedUser);
+            session.user = updatedUser;
+            return resp;
+        } catch (error) {
+            console.log(`Error saving user in database: ${error}`);
+            return undefined;
+        }
+    }
+
     static async createUser(data){
         try {
             const newUser = {
