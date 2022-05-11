@@ -37,8 +37,8 @@ export default {
       if(res.status == 200) {
         this.$router.push({ name: 'Login'});
       } 
-      });
-    },
+    });
+  },
     saveResume() {
       this.$emit('saveResume')
     }
