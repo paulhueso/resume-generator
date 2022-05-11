@@ -35,8 +35,15 @@
 const Api = require("../api/user.routes");
 
 export default {
-	components: {
-	},
+
+	data() {
+		return {
+			user: {},
+			mailInput: '',
+			passwordInput: '',
+    	};
+  	},
+
 	methods: {
 	goToRegister: function () {
 		this.$router.push({name: 'Register'});
