@@ -20,7 +20,7 @@ module.exports = class CvService{
                 ,
                 {
                     "_id":cv.id,
-                    "titre": cv.titre,
+                    "title": cv.title,
                     "type": cv.type,
                     "experiences": cv.experiences,
                     "formations": cv.formations
@@ -34,7 +34,7 @@ module.exports = class CvService{
     static async createCV(data){
         try {
             const newCV = {
-                'titre': 'CV n°1',
+                'title': 'CV n°1',
                 'type' : 1,
                 'experiences' : [{}],
                 'formations' : [{}]

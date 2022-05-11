@@ -29,7 +29,7 @@ print("User 'Achille' and 'Paul' created");
 db.cvs.insertMany([
 {
     _id: ObjectId("111111111111111111111111"),
-    titre: 'CV n°2 de Paul',
+    title: 'CV n°2 de Paul',
     type: false,
     experiences : [
         {
@@ -59,7 +59,7 @@ db.cvs.insertMany([
 },
 {
     _id: ObjectId("111111111111111111111112"),
-    titre: 'CV n°1 de Paul',
+    title: 'CV n°1 de Paul',
     type: true,
     experiences : [
         {

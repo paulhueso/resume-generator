@@ -13,18 +13,13 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ms-auto nav-right">
-        <b-button v-b-toggle.sidebar-1 variant="primary" class="navbtn">Edit resume</b-button>
-        <b-button variant="success" class="navbtn" @click="saveResume()">Save</b-button>
+        <div v-if="isHomePage">
+          <b-button v-b-toggle.sidebar-1 variant="primary" class="navbtn">Edit resume</b-button>
+          <b-button variant="success" class="navbtn" @click="saveResume()">Save</b-button>
+        </div>
 
-
-        <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
-          <template #button-content>
-            <em>User</em>
-          </template>
-          <b-dropdown-item href="#/profile">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <b-nav-item href="#/profile">Profile</b-nav-item>
+        <b-nav-item href="#">Sign Out</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -39,7 +34,8 @@ export default {
     saveResume() {
       this.$emit('saveResume')
     }
-  }
+  },
+  props: ['isHomePage']
 
 }
 </script>

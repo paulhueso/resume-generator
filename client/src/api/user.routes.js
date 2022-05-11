@@ -75,10 +75,10 @@ module.exports = class Api{
         });
     }
 
-    static async createCV(titreCV){
+    static async createCV(titleCV){
         return new Promise(function(resolve){
-            let data = {titre: titreCV};
-            axios.post("http://localhost:3000/api/cv", data, {
+            let data = {title: titleCV};
+            axios.get("http://localhost:3000/api/user/cv", data, {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
