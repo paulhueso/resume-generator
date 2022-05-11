@@ -6,7 +6,7 @@
     title="+"
     align="center"
   >
-    </b-card>
+  </b-card>
 
     <b-modal
       :id="modalName"

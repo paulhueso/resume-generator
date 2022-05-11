@@ -72,7 +72,7 @@ module.exports = class Cv{
          const data = req.body
          const updatedCV = {
             '_id': data._id,
-            'titre':data.titre,
+            'title':data.title,
             'type': data.type,
             'experiences': data.experiences,
             'formations': data.formations

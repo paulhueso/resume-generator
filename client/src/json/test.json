@@ -8,7 +8,7 @@
 	"current_organization":"Super Organization",
     "cv_list" : [
         {   "_Id":"1121265198",
-            "titre":"CV 1",
+            "title":"CV 1",
             "experiences" : [
                 {
                     "title" : "Stage developpeur fullstack - Unlatch",
@@ -37,7 +37,7 @@
         },
         {
             "_Id":"12345678",
-            "titre":"CV 2",
+            "title":"CV 2",
             "experiences" : [
                 {
                     "organization" : "Unlatch.................",
