@@ -3,7 +3,6 @@
   <b-card
         :title="title"
         :sub-title="period"
-        style="max-width: 20rem;"
         class="mb-2"
         v-b-modal="modalName"
     >
@@ -25,29 +24,23 @@
         <b-form-group
           label="Experience"
           label-for="title"
-          invalid-feedback="Complete all infos"
-          :state="nameState"
         >
-            <b-form-input
-                id="title"
-                v-model="titleInput"
-                :state="nameState"
-                required
-            ></b-form-input>
+          <b-form-input
+              id="title"
+              v-model="titleInput"
+              required
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
           label="Periode de travail"
           label-for="period"
-          invalid-feedback="Complete all infos"
-          :state="nameState"
         >
-            <b-form-input
-                id="period"
-                v-model="periodInput"
-                :state="nameState"
-                required
-            ></b-form-input>
+          <b-form-input
+              id="period"
+              v-model="periodInput"
+              required
+          ></b-form-input>
         </b-form-group>
 
 
@@ -55,14 +48,13 @@
             label="Description"
             label-for="description"
             invalid-feedback="Complete all infos"
-            :state="nameState"
         >
-            <b-form-input
-                id="description"
-                v-model="descriptionInput"
-                :state="nameState"
-                required
-            ></b-form-input>
+          <b-form-textarea
+              id="description"
+              v-model="descriptionInput"
+              required
+              rows="8"
+          ></b-form-textarea>
         </b-form-group>
       </form>
     </b-modal>
@@ -76,7 +68,9 @@ export default {
         'modalName',
         'title',
         'period',
-        'description'
+        'description',
+        'updateFormation',
+        'index'
     ],
     data() {
       return {
@@ -84,15 +78,9 @@ export default {
         periodInput: this.period,
         descriptionInput: this.description,
         nameState: null,
-        submittedNames: []
       }
     },
     methods: {
-      checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
-      },
       resetModal() {
         this.name = ''
         this.nameState = null
@@ -104,15 +92,11 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
-        // Push the name to submitted names
-        this.submittedNames.push(this.name)
+        this.$emit('updateFormation', this.titleInput, this.periodInput, this.descriptionInput, this.index)
+
         // Hide the modal manually
         this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
+          this.$refs['modal'].hide()
         })
       }
     }
@@ -120,5 +104,4 @@ export default {
 </script>
 
 <style>
-
 </style>

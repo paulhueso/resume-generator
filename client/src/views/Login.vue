@@ -44,13 +44,14 @@ export default {
 	goToMain: function (mailInput, passwordInput) {
 		Api.login(mailInput, passwordInput)
 		.then(res => {
-		console.log(res);
-		if(res.status == 200) {
-			this.$router.push({ name: 'Dashboard'});
-			console.log("Granted")
-		} else {
-			console.log("Unauthorized");
-		}
+			console.log(res);
+			if(res.status == 200) {
+				this.$router.push({ name: 'Dashboard'});
+				console.log(res.headers);
+				console.log("Granted")
+			} else {
+				console.log("Unauthorized");
+			}
 		});
 	},
 	}

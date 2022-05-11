@@ -1,29 +1,36 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" />
+    <Navbar id="navbar" @saveResume="saveResume" />
   </header>
 
   <body>
-    <!-- <h1 class = "accueilclasse"> Sea V generator: do it whale</h1> -->
-    <!-- <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F559809%2Fscreenshots%2F1672971%2Fwhale_logo.jpg&f=1&nofb=1" width="200" height="150" class = "logo"> -->
-    <!-- <p>{{name}}</p> -->
-   <!-- <ResumeStandard :user="user" />-->
-   
-   <Lecture />
-    
+    <Lecture :resume="resume" />
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
         <b-tab title="Formations" active>
-          <div v-for="experience in user.experiences" :key="experience.id" class="px-3 py-2">
-            <Card :modalName="experience.title" :title="experience.title" :period="experience.from" :description="experience.description" />
+          <div v-for="(experience, index) in resume.experiences" :key="index" class="px-3 py-2">
+            <CardExperience 
+              :modalName="experience.title" 
+              :title="experience.title" 
+              :period="experience.period" 
+              :description="experience.description" 
+              :index="index" 
+              @updateExperience="updateExperience"
+            />
           </div>
-          <!-- <AddCard /> -->
         </b-tab>
 
         <b-tab title="Experiences">
-          <div v-for="formation in user.formations" :key="formation.id" class="px-3 py-2">
-            <Card :modalName="formation.name" :title="formation.name" :period="formation.from" :description="formation.description" />
+          <div v-for="(formation, index) in resume.formations" :key="index" class="px-3 py-2">
+            <CardFormation 
+              :modalName="formation.name" 
+              :title="formation.name" 
+              :period="formation.period" 
+              :description="formation.description"
+              :index="index"
+              @updateFormation="updateFormation" 
+            />
           </div>
         </b-tab>
       </b-tabs>
@@ -37,9 +44,11 @@
 import Lecture from '/src/components/Lecture.vue'  
 import ResumeStandard from '/src/components/ResumeStandard.vue'  
 import Navbar from '/src/components/Navbar.vue'
-import Card from '/src/components/Card.vue'
+import CardExperience from '/src/components/CardExperience.vue'
+import CardFormation from '/src/components/CardFormation.vue'
 import AddCard from '/src/components/AddCard.vue'
 import json from "/src/json/test.json";
+const Api = require("../api/user.routes");
 
 
 
@@ -47,20 +56,46 @@ export default {
   components: {
     Lecture,
     Navbar,
-    Card,
+    CardExperience,
+    CardFormation,
     AddCard,
     ResumeStandard
   
   },
   name: 'Accueil',
-  props: ['name'],
   data() {
     return {
-      
-      user:json, 
-
+      resume: {},
+      idResume: ''
     };
   },
+  methods: {
+
+    updateExperience(title, period, description, id) {
+      this.resume.experiences[id].title = title; 
+      this.resume.experiences[id].period = period; 
+      this.resume.experiences[id].description = description;
+    },
+
+    updateFormation(name, period, description, id) {
+      this.resume.formations[id].name = name; 
+      this.resume.formations[id].period = period; 
+      this.resume.formations[id].description = description;
+    },
+
+    async saveResume() {
+      Api.saveResume(this.resume, this.idResume);
+    }
+  },
+
+  mounted() {
+    this.idResume = this.$route.params.id;
+    Api.fetchCVById(this.idResume)
+    .then(res => {
+      this.resume = res;
+    });
+  }
+
 }
 </script>
 
@@ -72,12 +107,6 @@ body {
   color: #000000
 }
 
-.accueilclasse{
-  margin-top: 5%;
-  text-align: center;
-  color: #03045E;
-}
-
 .logo{
   display: block;
   margin-left: auto;
@@ -86,7 +115,6 @@ body {
 
 #navbar {
   top: 0%
-
 }
 
 

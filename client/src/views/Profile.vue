@@ -53,19 +53,19 @@
 
 <script>
 
-import json from "/src/json/test.json";
 const Api = require("../api/user.routes");
 export default {
      
 	data() {
 		return {
-			user: json,
-			mailInput: json.mail,
-			nameInput: json.surname,
-			firstnameInput: json.firstname,
-			address: json.address,
-			tel: json.tel,
-			current_organization:json.current_organization,
+			user: {},
+			mailInput: '',
+			nameInput: '',
+			passwordInput: '',
+			firstnameInput: '',
+			address: '',
+			tel: '',
+			current_organization: '',
     	};
   	},
 
@@ -86,7 +86,17 @@ export default {
 				}
 			});
 		},
-	}
+	},
+	
+	mounted(){
+    	if(localStorage.user) this.user = JSON.parse(localStorage.user);  
+		this.mailInput = this.user.mail;
+		this.firstnameInput = this.user.firstname;
+		this.nameInput = this.user.surname;
+		this.address = this.user.address;
+		this.tel = this.user.tel;
+		this.current_organization = this.user.current_organization;
+  	}
 };
 
 

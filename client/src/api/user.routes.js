@@ -10,7 +10,9 @@ module.exports = class Api{
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                  },
+                    
+                },
+                withCredentials: true
             })
             .then(res => resolve(res))
             .catch(err => alert(`Cannot log in : ${err}`));
@@ -24,39 +26,68 @@ module.exports = class Api{
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                  },
+                },
             })
             .then(res => resolve(res))
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
 
-    static async list_CV(){
+    static async saveResume(resume, id){
+        return new Promise(function(resolve){
+            axios.patch(`http://localhost:3000/api/cv/${id}`, resume, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+
+    static async fetchCVs(){
         return new Promise(function(resolve) {
             axios.get("http://localhost:3000/api/cvs", {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
+                withCredentials: true 
             })
-            .then(CVS => resolve(CVS))
+            .then(cvs => resolve(cvs))
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
 
-    static async newCV(titreCV){
+    static async createCV(titreCV){
         return new Promise(function(resolve){
             let data = {titre: titreCV};
             axios.post("http://localhost:3000/api/cv", data, {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                  },
+                },
+                withCredentials: true 
+
             })
             .then(res => resolve(res))
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
  
-
+    static async fetchCVById(id){
+        return new Promise(function(resolve) {
+            axios.get(`http://localhost:3000/api/cv/${id}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res.data))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
 }

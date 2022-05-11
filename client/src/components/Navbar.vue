@@ -1,7 +1,7 @@
 <template>
 
 <div>
-    <b-navbar toggleable="lg" type="dark" variant="info" sticky="true">
+    <b-navbar toggleable="lg" type="dark" variant="info" id="navbar" >
     <b-navbar-brand id="title" href="#"> Sea V generator - Do it whale</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -14,7 +14,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ms-auto nav-right">
         <b-button v-b-toggle.sidebar-1 variant="primary" class="navbtn">Edit resume</b-button>
-        <b-button variant="success" class="navbtn">Save</b-button>
+        <b-button variant="success" class="navbtn" @click="saveResume()">Save</b-button>
 
 
         <b-nav-item-dropdown right>
@@ -31,6 +31,19 @@
 </div>
 
 </template>
+
+<script>
+export default {
+
+  methods: {
+    saveResume() {
+      this.$emit('saveResume')
+    }
+  }
+
+}
+</script>
+
 <style scoped>
 
 #title {
@@ -39,6 +52,12 @@
 
 .navbtn {
   margin-right: 10px;
+}
+
+#navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 250;
 }
 
 </style>
