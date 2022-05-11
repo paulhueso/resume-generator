@@ -105,20 +105,6 @@ module.exports = class Api{
         });
     }
 
-    static async user(){
-        return new Promise(function(resolve) {
-            axios.get("http://localhost:3000/api/user/", {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json;charset=UTF-8",
-                },
-                withCredentials: true
-            })
-            .then(user => resolve(user))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
-        });
-    }
-
     static async edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel){
         return new Promise(function(resolve){
             let data = {mail: mailInput, lastname: nameInput, firstname: firstnameInput, password: passwordInput, address: address, phone: tel};
@@ -158,7 +144,9 @@ module.exports = class Api{
                 },
                 withCredentials: true 
             })
-            .then(res => resolve(res.data))
+            .then(res => {
+                resolve(res.data)
+            })
             .catch(err => console.log(`Cannot reach server : ${err}`));;
         });
     }

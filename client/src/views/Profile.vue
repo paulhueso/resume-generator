@@ -61,7 +61,8 @@ export default {
 			address:"",
 			firstnameInput:"",
 			nameInput:"",
-			mailInput:""
+			mailInput:"",
+			passwordInput: ''
 		};
 	},
 
@@ -83,12 +84,14 @@ export default {
 	},
 
 	mounted(){
-		Api.user().then(user => this.user = user)
-		this.tel=this.user.tel;
-		this.address=this.user.address;
-		this.firstnameInput=this.user.firstname;
-		this.nameInput=this.user.surname;
-		this.mailInput=this.user.mail;
+		Api.fetchUserInfos().then(user => {
+			this.user = user
+			this.tel = user.tel;
+			this.address = user.address;
+			this.firstnameInput = user.firstname;
+			this.nameInput = user.surname;
+			this.mailInput = user.mail;
+		});
 	}
 };
 
