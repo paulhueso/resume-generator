@@ -22,61 +22,64 @@
 
     <div v-for="exp in resume.experiences" :key="exp.organization">
       <div class="paper">
-        <p class="page_title"><b>Experiences</b></p>
-        <div class="experiences">
-        <p class="page_2_exp">
-          <b>{{exp.title}}</b>
-        </p>
-        <p class="page_2_miss">
-          {{ exp.period }} | {{ user.current_organization }}
-        </p>
-        <p class="page_2_descp"><b>Description :</b></p>
-        <p class="page_2_desc">{{ exp.description }}</p>
-        <div class="page_bottom">
-          <p>
-            <b>{{ user.current_organization }}</b>
+        <div class="inside_paper">
+          <p class="page_title"><b>Experiences</b></p>
+          <div class="experiences">
+          <p class="page_2_exp">
+            <b>{{exp.title}}</b>
           </p>
-          <p class="">
-            {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
-            {{ user.firstname }} {{ user.surname }}
+          <p class="page_2_miss">
+            {{ exp.period }} | {{ user.current_organization }}
           </p>
-        </div>
+          <p class="page_2_descp"><b>Description :</b></p>
+          <p class="page_2_desc">{{ exp.description }}</p>
+          <div class="page_bottom">
+            <p>
+              <b>{{ user.current_organization }}</b>
+            </p>
+            <p class="">
+              {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
+              {{ user.firstname }} {{ user.surname }}
+            </p>
+          </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="paper">
-      <p class="page_title_2"><b>Formations</b></p>
-      <div
-        class="formations"
-        v-for="exp in resume.formations"
-        :key="exp.school"
-      >
-        <p class="page_3_exp">
-          <b>{{ exp.name }}</b>
-        </p>
-        <p class="page_3_place">
-          {{ exp.period }}
-        </p>
-        <p class="page_3_des"><b>Description :</b></p>
+      <div class="inside_paper">
+        <p class="page_title_2"><b>Formations</b></p>
+        <div
+          class="formations"
+          v-for="exp in resume.formations"
+          :key="exp.school"
+        >
+          <p class="page_3_exp">
+            <b>{{ exp.name }}</b>
+          </p>
+          <p class="page_3_place">
+            {{ exp.period }}
+          </p>
+          <p class="page_3_des"><b>Description :</b></p>
 
-        <p class="page_3_desc">{{ exp.description }}</p>
-      </div>
-      <div class="page_bottom">
-        <p class="page_bottom_3">
-          <b>{{ user.current_organization }}</b>
-        </p>
-        <p class="page_bottom_4">
-          {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
-          {{ user.firstname }} {{ user.surname }}
-        </p>
+          <p class="page_3_desc">{{ exp.description }}</p>
+        </div>
+        <div class="page_bottom">
+          <p class="page_bottom_3">
+            <b>{{ user.current_organization }}</b>
+          </p>
+          <p class="page_bottom_4">
+            {{ user.address }} . Tél: {{ user.tel }} . DT de Monsieur
+            {{ user.firstname }} {{ user.surname }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import json from "/src/json/test.json";
 
 export default {
   props : [
@@ -90,7 +93,7 @@ export default {
 <style >
 .paper {
   margin: 5% auto 2% auto !important;
-  padding: 1.5cm 2cm;
+  padding: 1.5cm 2cm 4cm 2cm !important;
   height: 29.7cm;
   width: 21cm;
   line-height: 1.5em;
@@ -106,6 +109,9 @@ export default {
   position: relative; 
   text-align: justify;
   text-justify: inter-word;
+}
+.inside_paper {
+  overflow: hidden;
 }
 .page_title_1 {
   text-align: center;

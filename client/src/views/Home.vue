@@ -89,12 +89,14 @@ export default {
       this.resume.experiences[id].title = title; 
       this.resume.experiences[id].period = period; 
       this.resume.experiences[id].description = description;
+      Api.saveResumeSession(this.resume, this.idResume);
     },
 
     updateFormation(name, period, description, id) {
       this.resume.formations[id].name = name; 
       this.resume.formations[id].period = period; 
       this.resume.formations[id].description = description;
+      Api.saveResumeSession(this.resume, this.idResume);
     },
 
     async saveResumeBDD() {
