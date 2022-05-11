@@ -21,10 +21,13 @@
         <b-form-group
           label="Experience"
           label-for="title"
+          invalid-feedback="Title is required"
+          :state="titleState"
         >
             <b-form-input
                 id="title"
                 v-model="title"
+                required
             ></b-form-input>
         </b-form-group>
 
@@ -43,10 +46,11 @@
             label="Description"
             label-for="description"
         >
-            <b-form-input
+            <b-form-textarea
                 id="description"
                 v-model="description"
-            ></b-form-input>
+                rows="8"
+            ></b-form-textarea>
         </b-form-group>
       </form>
     </b-modal>
@@ -67,13 +71,20 @@ export default {
         title: '',
         period: '',
         description: '',
+        titleState: null
       }
     },
     methods: {
+      checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.titleState = valid
+        return valid;
+      },
       resetModal() {
         this.title = ''
         this.period = ''
         this.description = ''
+        this.titleState = null
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing
@@ -82,6 +93,8 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
+        if(!this.checkFormValidity()) return
+
         if(this.isExperience) this.$emit('createNewExperience', this.title, this.period, this.description)
         else this.$emit('createNewFormation', this.title, this.period, this.description)
 

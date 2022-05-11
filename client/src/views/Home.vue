@@ -8,7 +8,7 @@
     <Lecture :resume="resume" />
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
-        <b-tab title="Formations" active>
+        <b-tab title="Experiences" active>
           <div v-for="(experience, index) in resume.experiences" :key="index" class="px-3 py-2">
             <CardExperience 
               :modalName="experience.title" 
@@ -23,7 +23,7 @@
         </b-tab>
         <!-- TODO: change key to index + dont allow empty title -->
 
-        <b-tab title="Experiences">
+        <b-tab title="Formations">
           <div v-for="(formation, index) in resume.formations" :key="index" class="px-3 py-2">
             <CardFormation 
               :modalName="formation.name" 
@@ -88,6 +88,22 @@ export default {
 
     async saveResume() {
       Api.saveResume(this.resume, this.idResume);
+    },
+
+    createNewExperience(title, period, description) {
+      this.resume.experiences.push({
+        title: title,
+        period: period,
+        description: description
+      });
+    },
+
+    createNewFormation(title, period, description) {
+      this.resume.formations.push({
+        name: title,
+        period: period,
+        description: description
+      });
     }
   },
 
@@ -98,25 +114,6 @@ export default {
       this.resume = res;
     });
   },
-
-  methods: {
-
-    createNewExperience(title, period, description) {
-      this.user.experiences.push({
-        title: title,
-        period: period,
-        description: description
-      });
-    },
-
-    createNewFormation(title, period, description) {
-      this.user.formations.push({
-        name: title,
-        period: period,
-        description: description
-      });
-    }
-  }
 
 }
 </script>

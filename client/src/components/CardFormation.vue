@@ -22,8 +22,10 @@
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
-          label="Experience"
+          label="Formation"
           label-for="title"
+          invalid-feedback="Title is required"
+          :state="titleState"
         >
           <b-form-input
               id="title"
@@ -39,7 +41,6 @@
           <b-form-input
               id="period"
               v-model="periodInput"
-              required
           ></b-form-input>
         </b-form-group>
 
@@ -47,16 +48,15 @@
         <b-form-group
             label="Description"
             label-for="description"
-            invalid-feedback="Complete all infos"
         >
           <b-form-textarea
               id="description"
               v-model="descriptionInput"
-              required
               rows="8"
           ></b-form-textarea>
         </b-form-group>
       </form>
+      
     </b-modal>
 
 </div>
@@ -77,13 +77,20 @@ export default {
         titleInput: this.title,
         periodInput: this.period,
         descriptionInput: this.description,
-        nameState: null,
+        titleState: null
       }
     },
     methods: {
+      checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.titleState = valid
+        return valid;
+      },
       resetModal() {
-        this.name = ''
-        this.nameState = null
+        this.titleInput = this.title
+        this.periodInput = this.period
+        this.descriptionInput = this.description
+        this.titleState = null
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing
@@ -92,6 +99,8 @@ export default {
         this.handleSubmit()
       },
       handleSubmit() {
+        if(!this.checkFormValidity()) return
+
         this.$emit('updateFormation', this.titleInput, this.periodInput, this.descriptionInput, this.index)
 
         // Hide the modal manually
