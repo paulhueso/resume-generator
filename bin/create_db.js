@@ -11,7 +11,8 @@ db.users.insertMany([
     mail : 'paul.hueso@gmail.com',
     password : '$2b$10$bhjCePLtv9EWQByP8adl8edGREqYZ2SL/mZIHTv7IoHXO/NyO5l3G',
     tel : "0603861269",
-    cv_list : [ObjectId("111111111111111111111111"),ObjectId("111111111111111111111112")]
+    cv_list : [ObjectId("111111111111111111111111"),ObjectId("111111111111111111111112")],
+    current_organization: "Super Organisation"
 },
 {
     firstname : 'Achille',

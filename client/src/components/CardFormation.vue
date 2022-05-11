@@ -56,7 +56,19 @@
           ></b-form-textarea>
         </b-form-group>
       </form>
-      
+      <template #modal-footer="{ ok, cancel }">
+        <!-- Emulate built in modal footer ok and cancel button actions -->
+        <b-button variant="danger" @click="handleDelete()" >
+          Delete
+        </b-button>
+        <b-button variant="secondary" @click="cancel()">
+          Cancel
+        </b-button>
+        <b-button variant="primary" @click="ok()">
+          OK
+        </b-button>
+        <!-- Button with custom close trigger value -->
+      </template>
     </b-modal>
 
 </div>
@@ -69,7 +81,6 @@ export default {
         'title',
         'period',
         'description',
-        'updateFormation',
         'index'
     ],
     data() {
@@ -107,7 +118,16 @@ export default {
         this.$nextTick(() => {
           this.$refs['modal'].hide()
         })
-      }
+      },
+      handleDelete() {
+ 
+        this.$nextTick(() => {
+          this.$refs['modal'].hide()
+        })
+
+        this.$emit('deleteFormation', this.index);
+        
+      }      
     }
 }
 </script>

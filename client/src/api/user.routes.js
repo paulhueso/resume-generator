@@ -33,7 +33,21 @@ module.exports = class Api{
         });
     }
 
-    static async saveResume(resume, id){
+    static async saveResumeBDD(resume, id){
+        return new Promise(function(resolve){
+            axios.get(`http://localhost:3000/api/cvs/save`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+
+    static async saveResumeSession(resume, id){
         return new Promise(function(resolve){
             axios.patch(`http://localhost:3000/api/cv/${id}`, resume, {
                 headers: {
@@ -88,6 +102,20 @@ module.exports = class Api{
             })
             .then(res => resolve(res.data))
             .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
+
+    static async fetchUserInfos() {
+        return new Promise(function(resolve) {
+            axios.get('http://localhost:3000/api/user/', {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res.data))
+            .catch(err => console.log(`Cannot reach server : ${err}`));;
         });
     }
 }

@@ -1,12 +1,12 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" @saveResume="saveResume" />
+    <Navbar id="navbar" @saveResume="saveResumeBDD" />
   </header>
 
   <body>
-    <Lecture :resume="resume" />
-    <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
+    <Lecture :resume="resume" :user="user" />
+    <b-sidebar id="sidebar-1" title="Informations" width='20%' right shadow>
       <b-tabs content-class="mt-3">
         <b-tab title="Experiences" active>
           <div v-for="(experience, index) in resume.experiences" :key="index" class="px-3 py-2">
@@ -17,11 +17,16 @@
               :description="experience.description" 
               :index="index" 
               @updateExperience="updateExperience"
+              @deleteExperience='deleteExperience'
             />
           </div>
-          <AddCard class="px-3" modalName="addExp" :isExperience='true' @createNewExperience='createNewExperience' />
+          <AddCard 
+            class="px-3" 
+            modalName="addExp" 
+            :isExperience='true' 
+            @createNewExperience='createNewExperience' 
+          />
         </b-tab>
-        <!-- TODO: change key to index + dont allow empty title -->
 
         <b-tab title="Formations">
           <div v-for="(formation, index) in resume.formations" :key="index" class="px-3 py-2">
@@ -32,9 +37,16 @@
               :description="formation.description"
               :index="index"
               @updateFormation="updateFormation" 
+              @deleteFormation='deleteFormation' 
+
             />
           </div>
-          <AddCard class="px-3" modalName="addFormation" :isExperience='false' @createNewFormation='createNewFormation' />
+          <AddCard 
+            class="px-3" 
+            modalName="addFormation" 
+            :isExperience='false' 
+            @createNewFormation='createNewFormation' 
+          />
         </b-tab>
       </b-tabs>
       
@@ -50,7 +62,6 @@ import Navbar from '/src/components/Navbar.vue'
 import CardExperience from '/src/components/CardExperience.vue'
 import CardFormation from '/src/components/CardFormation.vue'
 import AddCard from '/src/components/AddCard.vue'
-import json from "/src/json/test.json";
 const Api = require("../api/user.routes");
 
 
@@ -69,7 +80,8 @@ export default {
   data() {
     return {
       resume: {},
-      idResume: ''
+      idResume: '',
+      user: {}
     };
   },
   methods: {
@@ -86,8 +98,8 @@ export default {
       this.resume.formations[id].description = description;
     },
 
-    async saveResume() {
-      Api.saveResume(this.resume, this.idResume);
+    async saveResumeBDD() {
+      Api.saveResumeBDD();
     },
 
     createNewExperience(title, period, description) {
@@ -96,6 +108,7 @@ export default {
         period: period,
         description: description
       });
+      Api.saveResumeSession(this.resume, this.idResume);
     },
 
     createNewFormation(title, period, description) {
@@ -104,15 +117,24 @@ export default {
         period: period,
         description: description
       });
+      Api.saveResumeSession(this.resume, this.idResume);
+    },
+
+    deleteExperience(index) {
+      this.resume.experiences.splice(index, 1);
+      Api.saveResumeSession(this.resume, this.idResume);
+    },
+
+    deleteFormation(index) {
+      this.resume.formations.splice(index, 1);
+      Api.saveResumeSession(this.resume, this.idResume);
     }
   },
 
   mounted() {
     this.idResume = this.$route.params.id;
-    Api.fetchCVById(this.idResume)
-    .then(res => {
-      this.resume = res;
-    });
+    Api.fetchCVById(this.idResume).then(res => this.resume = res);
+    Api.fetchUserInfos().then(res => this.user = res);
   },
 
 }
