@@ -38,8 +38,8 @@ export default {
 	
 	data() {
     return {
-      user: json, //a supp
-			user_2: axios.get("http://localhost:3000/api/cvs")
+		user: json, //a supp
+		user_2: axios.get("http://localhost:3000/api/cvs")
     };
   }
 }

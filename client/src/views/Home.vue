@@ -10,7 +10,7 @@
     <!-- <p>{{name}}</p> -->
    <!-- <ResumeStandard :user="user" />-->
    
-   <Lecture :Cv_Id="Cv_Id"/>
+   <Lecture />
     
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
@@ -40,7 +40,7 @@ import Navbar from '/src/components/Navbar.vue'
 import Card from '/src/components/Card.vue'
 import AddCard from '/src/components/AddCard.vue'
 import json from "/src/json/test.json";
-const axios = require('axios').default;
+
 
 
 export default {
@@ -56,17 +56,11 @@ export default {
   props: ['name'],
   data() {
     return {
-      user2:axios.get("http://localhost:3000/api/cv/",{  params: { id: this.Cv_Id } }),
-      user:"test", //a supp
-      Cv_Id:"test"
+      
+      user:json, 
 
     };
   },
- 
-  created() {
-    this.Cv_Id=this.$route.params.id;
-  },
-
 }
 </script>
 
