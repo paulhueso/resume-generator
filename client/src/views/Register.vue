@@ -67,7 +67,7 @@ export default {
   Api.getUser()
 	.then(res => {
 	console.log(res);
-	if(res.status == 200) {
+	if(res.response.status == 200) {
 		this.$router.push({ name: 'Home'});
 	}
 	});

@@ -63,10 +63,10 @@ export default {
     Api.getUser()
 		.then(res => {
 		console.log(res);
-		if(res.status == 401) {
+		if(res.response.status == 401) {
       this.$router.push({ name: 'Login'});
-		}
-		});
+      }
+      });
     }
 
 }
