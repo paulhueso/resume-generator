@@ -19,18 +19,26 @@
         </div>
 
         <b-nav-item href="#/profile">Profile</b-nav-item>
-        <b-nav-item href="#">Sign Out</b-nav-item>
+        <b-nav-item @click="Logout">Sign Out</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </div>
 
 </template>
-
 <script>
+const Api = require("../api/user.routes");
 export default {
-
   methods: {
+    Logout: async function () {
+      Api.logout()
+      .then(res => {
+        console.log(res);
+      if(res.status == 200) {
+        this.$router.push({ name: 'Login'});
+      } 
+    });
+  },
     saveResume() {
       this.$emit('saveResume')
     }
@@ -38,8 +46,8 @@ export default {
   props: ['isHomePage']
 
 }
-</script>
 
+</script>
 <style scoped>
 
 #title {
