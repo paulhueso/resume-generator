@@ -5,7 +5,7 @@
 </header> 
 <b-card-group deck>
 
-<b-card v-for="exp in user.cv_list" :key="exp.titre" :title="exp.titre" class="card" >
+<b-card v-for="exp in CVS.cv_list" :key="exp.titre" :title="exp.titre" class="card" >
   
 		<button type="button" class="btn btn-primary" @click="$router.push({ name: 'Home', params: {id:exp._Id} })">Modifier CV</button>
 		<button type="button" class="btn btn-danger">Supprimer Cv</button>
@@ -14,9 +14,9 @@
 <b-card title="Créer un nouveau Cv" class="card">
 	<div class="input-group mb-3">
   <div class="input-group-prepend">
-    <button type="button" class="btn btn-warning">Créer un nouveau Cv</button>
+    <button type="button" @click="createNewCV(TitreInput)" class="btn btn-warning">Créer un nouveau Cv</button>
   </div>
-  <input type="text" class="form-control" placeholder="Titre du Cv" aria-label="" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" placeholder="Titre du Cv" aria-label="" aria-describedby="basic-addon1" v-model="TitreInput">
 </div>
 		
 	
@@ -29,7 +29,7 @@
 <script>
 import Navbar from '/src/components/Navbar.vue'
 import json from "/src/json/test.json";
-const axios = require('axios').default;
+const Api = require("../api/user.routes");
 export default {
 
 	components: {
@@ -38,12 +38,23 @@ export default {
 	
 	data() {
     return {
-		user: json, //a supp
-		user_2: axios.get("http://localhost:3000/api/cvs")
+		CVS:{} , //a supp
+		//CVS:json,
+		
     };
-  }
+  },
+	methods: {
+    createNewCV(titre) {
+		this.CVS.cv_list.push({
+			titre: titre,
+			});
+		Api.NewCV(titre);
+	},
+},
+	mounted(){
+    Api.List_CV().then(CVS => this.CVS= CVS)
+	}
 }
-
 </script>
 
 <style scoped>
