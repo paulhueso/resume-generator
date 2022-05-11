@@ -50,6 +50,7 @@
 
 <script>
 
+
 const Api = require("../api/user.routes");
 export default {
      
@@ -67,13 +68,13 @@ export default {
 			return this.user.surname;
     },
 		firstnameInput() {
-      return this.user.firstname;
+			return this.user.firstname;
     },
 		address() {
-      return this.user.address;
+			return this.user.address;
     },
 		tel() {
-      return this.user.tel;
+			return this.user.tel;
     }
 },
 	methods: {
@@ -82,15 +83,12 @@ export default {
 			this.$router.push({ name: 'Dashboard'})
 		},
 
-		profileUser: function (mailInput, passwordInput, nameInput, firstnameInput,address,tel) {
+		profileUser: async function (mailInput, passwordInput, nameInput, firstnameInput,address,tel) {
 			Api.edit_profile(mailInput, passwordInput, nameInput, firstnameInput, address, tel)
 			.then(res => {
 				if(res.status == 200) {
 					this.$router.push({ name: 'Dashboard'});
-					console.log("Granted")
-				} else {
-					console.log("Unauthorized");
-				}
+				} 
 			});
 		},
 	},
