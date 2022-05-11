@@ -37,7 +37,7 @@ export default {
 	};
 },
 	methods: {
-		createNewCV(titre) {
+		async createNewCV(titre) {
 			this.cvs.push({
 				titre: titre,
 			});

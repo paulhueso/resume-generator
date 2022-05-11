@@ -6,7 +6,6 @@
 
   <body>
     <Lecture :resume="resume" />
-
     <b-sidebar id="sidebar-1" title="Sidebar" width='20%' right shadow>
       <b-tabs content-class="mt-3">
         <b-tab title="Formations" active>
@@ -64,10 +63,10 @@ export default {
   
   },
   name: 'Accueil',
-  props: ['name'],
   data() {
     return {
-      resume: json.cv_list[0]
+      resume: {},
+      idResume: ''
     };
   },
   methods: {
@@ -84,9 +83,17 @@ export default {
       this.resume.formations[id].description = description;
     },
 
-    saveResume() {
-      Api.saveResume(this.resume);
+    async saveResume() {
+      Api.saveResume(this.resume, this.idResume);
     }
+  },
+
+  mounted() {
+    this.idResume = this.$route.params.id;
+    Api.fetchCVById(this.idResume)
+    .then(res => {
+      this.resume = res;
+    });
   }
 
 }

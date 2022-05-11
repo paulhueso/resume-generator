@@ -40,6 +40,7 @@ module.exports = class Api{
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
+                withCredentials: true 
             })
             .then(res => resolve(res))
             .catch(err => console.log(`Cannot reach server : ${err}`));
@@ -67,12 +68,26 @@ module.exports = class Api{
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                  },
+                },
+                withCredentials: true 
+
             })
             .then(res => resolve(res))
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
  
-
+    static async fetchCVById(id){
+        return new Promise(function(resolve) {
+            axios.get(`http://localhost:3000/api/cv/${id}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res.data))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+        });
+    }
 }
