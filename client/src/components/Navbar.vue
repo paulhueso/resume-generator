@@ -13,9 +13,10 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ms-auto nav-right">
-        <b-button v-b-toggle.sidebar-1 variant="primary" class="navbtn">Edit resume</b-button>
-        <b-button variant="success" class="navbtn" @click="saveResume()">Save</b-button>
-
+        <div v-if="isHomePage">
+          <b-button v-b-toggle.sidebar-1 variant="primary" class="navbtn">Edit resume</b-button>
+          <b-button variant="success" class="navbtn" @click="saveResume()">Save</b-button>
+        </div>
 
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
@@ -39,7 +40,8 @@ export default {
     saveResume() {
       this.$emit('saveResume')
     }
-  }
+  },
+  props: ['isHomePage']
 
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" @saveResume="saveResumeBDD" />
+    <Navbar id="navbar" @saveResume="saveResumeBDD" :isHomePage="true" />
   </header>
 
   <body>

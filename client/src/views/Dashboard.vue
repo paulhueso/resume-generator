@@ -1,7 +1,7 @@
 <template>
 <div>
 <header>
-	<Navbar id="navbar" />
+	<Navbar id="navbar" :isHomePage="false" />
 </header> 
 <b-card-group deck class="cards">
 	<b-card v-for="cv in cvs" :key="cv.title" :title="cv.title" class="card" align="center">
