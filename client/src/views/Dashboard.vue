@@ -85,7 +85,7 @@ export default {
 			return valid;
 		},
 		resetModal() {
-			this.title = ''
+			this.titleInput = ''
 			this.description = ''
 			this.titleState = null
 		},
@@ -105,7 +105,7 @@ export default {
 			
 			// Hide the modal manually
 			this.$nextTick(() => {
-			this.$refs['modal'].hide()
+				this.$refs['modal'].hide()
 			})
 		}
 	},
@@ -124,6 +124,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	gap: 100px;
+	flex-wrap: wrap;
 }
 
 header {
@@ -137,7 +138,8 @@ button {
 
 .card{
 	margin-top: 1%;
-	margin-bottom: 1%;	
+	margin-bottom: 1%;
+	min-width: 18rem; 	
 	width: 18rem; 
 	height: 25rem;
 }
