@@ -1,34 +1,28 @@
 <template>
 <div>
 <header>
-	<Navbar id="navbar"/>
+	<Navbar id="navbar" />
 </header> 
-<b-card-group deck>
-
-<b-card v-for="exp in cvs.cv_list" :key="exp.titre" :title="exp.titre" class="card" >
-  
-		<button type="button" class="btn btn-primary" @click="$router.push({ name: 'Home', params: {id:exp._Id} })">Modifier CV</button>
-		<button type="button" class="btn btn-danger">Supprimer Cv</button>
-    
-  </b-card>
-<b-card title="Créer un nouveau Cv" class="card">
-	<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <button type="button" @click="createNewCV(titreInput)" class="btn btn-warning">Créer un nouveau Cv</button>
-  </div>
-  <input type="text" class="form-control" placeholder="Titre du Cv" aria-label="" aria-describedby="basic-addon1" v-model="titreInput">
-</div>
-		
-	
-</b-card>
+<b-card-group deck class="cards">
+	<b-card v-for="cv in cvs" :key="cv.titre" :title="cv.titre" class="card" >
+		<button type="button" class="btn btn-primary" @click="$router.push({ name: 'Home', params: {id:cv._id} })">Modifier CV</button>
+		<button type="button" class="btn btn-danger">Supprimer CV</button>
+	</b-card>
+	<b-card title="Créer un nouveau CV" class="card">
+		<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<button type="button" @click="createNewCV(titreInput)" class="btn btn-warning">Créer</button>
+		</div>
+		<input type="text" class="form-control" placeholder="Titre du CV" aria-label="" aria-describedby="basic-addon1" v-model="titreInput">
+		</div>		
+	</b-card>
  </b-card-group>
-	</div>
+</div>
 </template>
 
 
 <script>
 import Navbar from '/src/components/Navbar.vue'
-import json from "/src/json/test.json";
 const Api = require("../api/user.routes");
 export default {
 
@@ -38,20 +32,20 @@ export default {
 	
 	data() {
     return {
-		cvs:{} , //a supp
+		cvs: {},
 		titreInput: '',		
 	};
 },
 	methods: {
 		createNewCV(titre) {
-			this.cvs.cv_list.push({
+			this.cvs.push({
 				titre: titre,
-				});
+			});
 			Api.createCV(titre);
 		},
 	},
 	mounted(){
-		Api.fetchCVs().then(cvs => this.cvs= cvs)
+		Api.fetchCVs().then(cvs => this.cvs = cvs.data)
 	}
 }
 </script>
@@ -60,10 +54,13 @@ export default {
 #navbar {
   top: 0%
 }
+
+header {
+	margin-bottom: 100px;
+}
+
 .card{
-	margin-top:2%;
-	margin-bottom: 1%;
-	
-	
+	margin-top: 1%;
+	margin-bottom: 1%;	
 }
 </style>

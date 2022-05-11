@@ -55,7 +55,7 @@ module.exports = class Api{
                 },
                 withCredentials: true 
             })
-            .then(CVS => resolve(CVS))
+            .then(cvs => resolve(cvs))
             .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }

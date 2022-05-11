@@ -79,7 +79,6 @@ export default {
     },
 
     updateFormation(name, period, description, id) {
-      console.log("hey")
       this.resume.formations[id].name = name; 
       this.resume.formations[id].period = period; 
       this.resume.formations[id].description = description;
