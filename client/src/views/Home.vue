@@ -60,11 +60,13 @@ export default {
   },
   mounted()
     {
-      //let token = requête get /api/user/
-      if(false) //token par la suite
-      {
-        this.$router.push({name:'Login'})
-      }
+    Api.getUser()
+		.then(res => {
+		console.log(res);
+		if(res.status == 401) {
+      this.$router.push({ name: 'Login'});
+		}
+		});
     }
 
 }

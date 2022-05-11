@@ -53,6 +53,16 @@ export default {
 		}
 		});
 	},
+	},
+	mounted()
+    {
+    Api.getUser()
+	.then(res => {
+	console.log(res);
+	if(res.status == 200) {
+		this.$router.push({ name: 'Home'});
+		}
+	});
 	}
 }
 
