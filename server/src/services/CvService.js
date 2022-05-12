@@ -33,7 +33,7 @@ module.exports = class CvService{
         }
     }
 
-    static async createCV(data,user,res,cv_list){
+    static async createCV(data,user,res,session){
         try {
             const newCV = {
                 'title':data.title || "Default",
@@ -45,7 +45,7 @@ module.exports = class CvService{
             if(response){
                 //succes de la requête
                 user.cv_list.push(response._id);
-                cv_list.push(response);
+                session.cv_list.push(response);
                 const response2 = await User.findOneAndReplace({_id:user._id}, user);
                 if(response2){
                     res.status(201).json(response);
@@ -78,6 +78,8 @@ module.exports = class CvService{
                         //Remove the cv (database)
                         response = undefined;
                         response = await Cv.findOneAndDelete({_id:id});
+                        index = session.modified_cvs.indexOf(id);
+                        if(index != -1) session.modified_cvs.splice(index,1);
                         if(response) res.status(200).json("CV deleted");
                         else res.status(500).json("Internal Server Error: Couldn't delete CV");
                     }
@@ -86,6 +88,33 @@ module.exports = class CvService{
                 else res.status(500).json("Internal Server Error: index = -1");
             }
             else res.status(403).json("Forbidden: CV doesn't belong to User");
+        } 
+        catch (error) {
+            console.log(error);
+        } 
+    }
+
+    static async RestoreCV(id,req,res){
+        try {
+            const index = req.session.modified_cvs.indexOf(id);
+            if(index != -1){
+               const cv = await Cv.findOne({_id:id});
+               if(cv){
+                    const index2 = -1;
+                    for(var i = 0; i < req.session.cv_list.length;i++){
+                        if(req.session.cv_list[i]._id == id) index2 = i;
+                    }
+                    if(index != -1){
+                        req.session.cv_list.splice(index2,1);
+                        req.session.cv_list.push(cv);
+                        req.session.modified_cvs.splice(index,1);
+                        res.status(200).json(cv);
+                    }
+                    else res.status(500).json("Internal Server Error: CV not in session list");
+               }
+               else res.status(500).json("Internal Server Error: CV not found in database");
+            }
+            else res.status(404).json("Not Found: CV not modified");
         } 
         catch (error) {
             console.log(error);
