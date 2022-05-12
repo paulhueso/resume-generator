@@ -51,13 +51,15 @@ export default {
 	goToMain: function (mailInput, passwordInput) {
 		Api.login(mailInput, passwordInput)
 		.then(res => {
-			console.log(res);
 			if(res.status == 200) {
 				this.$router.push({ name: 'Dashboard'});
-				console.log(res.headers);
-				console.log("Granted")
 			} else {
-				console.log("Unauthorized");
+				this.$toast.open({
+					message: "Error, wrong credentials",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
 			}
 		});
 	},

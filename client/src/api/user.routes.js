@@ -15,7 +15,7 @@ module.exports = class Api{
                 withCredentials: true
             })
             .then(res => resolve(res))
-            .catch(err => alert(`Cannot log in : ${err}`));
+            .catch(err => resolve(err));
         });
     }
 
