@@ -4,7 +4,10 @@
 	<Navbar id="navbar" :isHomePage="false" />
 </header> 
 <b-card-group deck class="cards">
-	<b-card v-for="cv in cvs" :key="cv.title" :title="cv.title" class="card" align="center">
+	<b-card v-for="cv in cvs" :key="cv.title" class="card" align="center">
+		<b-card-text class="addBtn">
+			<br /><p style="font-size: 40px">{{ cv.title }}</p>
+		</b-card-text>
 		<template #footer>
 			<button type="button" class="btn btn-primary" @click="$router.push({ name: 'Home', params: {id:cv._id} })">Edit CV</button>
 			<button type="button" class="btn btn-danger">Delete CV</button>
