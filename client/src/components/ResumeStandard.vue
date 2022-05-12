@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped >
 .paper {
   margin: 1% auto 2.5% auto;
   padding: 1.5cm 2cm;
@@ -44,7 +44,7 @@ export default {
 	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
-			flex-direction: column;
+	flex-direction: column;
 	border-radius: 4px;
 	box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
 }
