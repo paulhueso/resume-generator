@@ -2,7 +2,6 @@ const { ObjectId } = require('mongodb');
 let mongoose = require('mongoose');
 
 let cvSchema = mongoose.Schema({
-    _id: { type: ObjectId },
     title: String,
     type : Boolean, //false : standard, true : ESN
     experiences : { type : Array, default : []},

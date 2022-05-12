@@ -1,4 +1,5 @@
 const CvService = require("../services/CvService");
+const UserService = require("../services/UserService");
 
 module.exports = class Cv{
 
@@ -101,11 +102,29 @@ module.exports = class Cv{
 
    static async apiCreateCV(req, res){
       try {
-         let cv = {};
-         const createdCV = await CvService.createCV(cv);
-         res.json(createdCV);
+         if(req.session.isAuthentificated){
+            let user = req.session.user;
+            let cv_list = req.session.cv_list;
+            const createdCV = await CvService.createCV(req.body,user,res,cv_list);
+         }
+         else res.status(401).json("Unauthorized: please log in");
       } catch (error) {
          res.status(500).json({error: error})
       }
    }
+
+   static async apiDeleteCV(req, res){
+      try {
+         if(req.session.isAuthentificated){
+            const id = req.params.id;
+            let user = req.session.user;
+            let cv_list = req.session.cv_list;
+            await CvService.deleteCV(id,res,req.session);
+         }
+         else res.status(401).json("Unauthorized: please log in");
+      } catch (error) {
+         res.status(500).json({error: error})
+      }
+   }
+   
 }
