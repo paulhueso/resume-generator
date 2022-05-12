@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="paper" :style="margin_">
+    <div class="paper">
       <p class="page_title_1"><b>CV ESN</b></p>
       <div class="userInfos">
 
@@ -19,9 +19,9 @@
         <p class="page_1_mel">Mail: {{ user.mail }}</p>
       </div>
     </div>
-    
+
     <div v-for="exp in resume.experiences" :key="exp.organization">
-      <div class="paper" :style="margin_">
+      <div class="paper">
         <div class="inside_paper">
           <p class="page_title"><b>Experiences</b></p>
           <div class="experiences">
@@ -44,11 +44,10 @@
           </div>
           </div>
         </div>
-      </div >
-    
+      </div>
     </div>
 
-    <div class="paper" :style="margin_">
+    <div class="paper">
       <div class="inside_paper">
         <p class="page_title_2"><b>Formations</b></p>
         <div
@@ -77,8 +76,7 @@
         </div>
       </div>
     </div>
-    </div>
-  
+  </div>
 </template>
 
 <script>
@@ -86,15 +84,13 @@
 export default {
   props : [
     'resume',
-    'user', 
-    'margin_'
+    'user'
   ],
 };
 
 </script>
 
-<style scoped>
-
+<style >
 .paper {
   margin: 5% auto 2% auto !important;
   padding: 1.5cm 2cm 4cm 2cm !important;
@@ -107,7 +103,7 @@ export default {
 	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
-	flex-direction: column;
+					flex-direction: column;
 	border-radius: 4px;
 	box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2); 
   position: relative; 
