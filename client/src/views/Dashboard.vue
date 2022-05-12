@@ -173,8 +173,24 @@ export default {
 		console.log(res);
 		if(res.response.status == 401) {
 			this.$router.push({ name: 'Login'});
-			}
+		} else if(res.status == 401 ) {
+          this.$toast.open({
+            message: "Unauthorized",
+            type: "error",
+            duration: 5000,
+            dismissible: true
+          });
+          this.$router.push({ name: 'Login'});
+        } else if(res.status == 500 ){
+          this.$toast.open({
+            message: "Error, serveur !",
+            type: "error",
+            duration: 5000,
+            dismissible: true
+          });
+        }
 		});
+
 		Api.fetchCVs().then(cvs => this.cvs = cvs.data)
 		.then(res => {
 			if(res.status == 401) {
