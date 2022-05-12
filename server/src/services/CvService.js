@@ -44,7 +44,7 @@ module.exports = class CvService{
             const response = await new Cv(newCV).save();
             if(response){
                 //succes de la requête
-                user.cv_list.push(response._id);
+                session.user.cv_list.push(response._id);
                 session.cv_list.push(response);
                 const response2 = await User.findOneAndReplace({_id:user._id}, user);
                 if(response2){
