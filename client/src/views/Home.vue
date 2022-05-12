@@ -1,7 +1,14 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" @saveResume="saveResumeBDD" :isHomePage="true" @generatePDF="generateReport" />
+    <Navbar 
+      id="navbar" 
+      :isHomePage="true"
+      :isModified="isModified" 
+      @saveResume="saveResumeBDD" 
+      @generatePDF="generateReport"
+      @restoreResume="restoreResume"  
+    />
   </header>
 
   <body>
@@ -99,54 +106,57 @@ export default {
       idResume: '',
       user: {},
       resume:{},
+      isModified: false
     };
   },
   methods: {
     generateReport () {
       this.$refs.html2Pdf.generatePdf()
     },
-    updateExperience(title, period, description, id) {
+
+    async updateExperience(title, period, description, id) {
       this.resume.experiences[id].title = title; 
       this.resume.experiences[id].period = period; 
       this.resume.experiences[id].description = description;
-      Api.saveResumeSession(this.resume, this.idResume);
+      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true);
     },
 
-    updateFormation(name, period, description, id) {
+    async updateFormation(name, period, description, id) {
       this.resume.formations[id].name = name; 
       this.resume.formations[id].period = period; 
       this.resume.formations[id].description = description;
-      Api.saveResumeSession(this.resume, this.idResume);
+      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true);
     },
 
     async saveResumeBDD() {
       Api.saveResumeBDD().then(res => {
-        console.log(res)
         if(res.status == 304 || res.status == 200){
           this.$toast.open({
-            message: "Resume saved !",
+            message: "Resume saved!",
             type: "success",
             duration: 5000,
             dismissible: true
-          })
+          });
+          this.isModified = false;
         } else {
           this.$toast.open({
-            message: "Error, could not be saved !",
+            message: "Error, could not be saved!",
             type: "error",
             duration: 5000,
             dismissible: true
-          })
+          });
         }
       });
     },
 
-    createNewExperience(title, period, description) {
+    async createNewExperience(title, period, description) {
       this.resume.experiences.push({
         title: title,
         period: period,
         description: description
       });
-      Api.saveResumeSession(this.resume, this.idResume);
+      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true);
+
     },
 
     async createNewFormation(title, period, description) {
@@ -155,17 +165,39 @@ export default {
         period: period,
         description: description
       });
-      Api.saveResumeSession(this.resume, this.idResume);
+      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true);
     },
 
-    deleteExperience(index) {
+    async deleteExperience(index) {
       this.resume.experiences.splice(index, 1);
-      Api.saveResumeSession(this.resume, this.idResume);
+      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true);
     },
 
-    deleteFormation(index) {
+    async deleteFormation(index) {
       this.resume.formations.splice(index, 1);
-      Api.saveResumeSession(this.resume, this.idResume);
+      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true);
+    },
+
+    async restoreResume() {
+      Api.fetchCvBeforeEdit(this.idResume).then(res => {
+        if(res.status == 200) {
+          this.resume = res.data;
+          this.isModified = false;
+          this.$toast.open({
+              message: "Resume restored!",
+              type: "success",
+              duration: 5000,
+              dismissible: true
+          });
+        } else {
+          this.$toast.open({
+              message: "Could not restore resume...",
+              type: "success",
+              duration: 5000,
+              dismissible: true
+          });
+        }
+      });
     }
   },
 
@@ -174,6 +206,7 @@ export default {
     this.idResume = this.$route.params.id;
     Api.fetchCVById(this.idResume).then(res => this.resume = res);
     Api.fetchUserInfos().then(res => this.user = res);
+    Api.fetchCvStatus(this.idResume).then(res => this.isModified = (res.status == 200))
   },
 
 }

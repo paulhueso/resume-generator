@@ -150,4 +150,32 @@ module.exports = class Api{
             .catch(err => console.log(`Cannot reach server : ${err}`));;
         });
     }
+
+    static async fetchCvStatus(id) {
+        return new Promise(function(resolve) {
+            axios.get(`http://localhost:3000/api/cv/status/${id}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));;
+        });
+    }
+
+    static async fetchCvBeforeEdit(id) {
+        return new Promise(function(resolve) {
+            axios.get(`http://localhost:3000/api/cv/restore/${id}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));;
+        });
+    }
 }
