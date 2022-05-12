@@ -37,7 +37,14 @@ export default {
       .then(res => {
         if(res.status == 200) {
           this.$router.push({ name: 'Login'});
-        } 
+        }else{
+          this.$toast.open({
+					message: "User unauthenticated !",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+					});
+        }
       });
     },
     saveResume() {

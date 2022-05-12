@@ -115,9 +115,16 @@ export default {
 						duration: 5000,
 						dismissible: true
 					});
-				} else {
+				} else if(res.status == 401) {
 					this.$toast.open({
-						message: "Error, could not be created !",
+						message: "Error, Unauthorized !",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}else if(res.status == 500) {
+					this.$toast.open({
+						message: "Internal Server Error",
 						type: "error",
 						duration: 5000,
 						dismissible: true
@@ -141,9 +148,16 @@ export default {
 						duration: 5000,
 						dismissible: true
 					});
-				} else {
+				} else if(res.status == 401) {
 					this.$toast.open({
-						message: "Error, could not be deleted !",
+						message: "Error, Unauthorized !",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}else if(res.status == 500) {
+					this.$toast.open({
+						message: "Internal Server Error",
 						type: "error",
 						duration: 5000,
 						dismissible: true
@@ -162,6 +176,23 @@ export default {
 			}
 		});
 		Api.fetchCVs().then(cvs => this.cvs = cvs.data)
+		.then(res => {
+			if(res.status == 401) {
+				this.$toast.open({
+					message: "Error, Unauthorized !",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+					});
+			}else if(res.status == 500) {
+				this.$toast.open({
+					message: "Internal Server Error",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+					});
+				}
+		})
 	}
 }
 </script>

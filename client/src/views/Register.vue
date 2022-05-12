@@ -15,7 +15,7 @@
     <h1>Inscription</h1>
     <div class="content">
       <div class="input-field">
-        <input type="email" placeholder="Email" v-model="mailInput">
+        <input type="email" placeholder="Email" v-model="mailInput" required>
       </div>
       <div class="input-field">
         <input type="text" placeholder="Nom" v-model="nameInput">
@@ -24,7 +24,7 @@
         <input type="text" placeholder="Prénom" v-model="firstnameInput">
       </div>
       <div class="input-field">
-        <input type="password" placeholder="Mot de passe" autocomplete="new-password" v-model="passwordInput">
+        <input type="password" placeholder="Mot de passe" autocomplete="new-password" v-model="passwordInput" required>
       </div>
     </div>
     <div class="action">
@@ -69,7 +69,7 @@ export default {
           });
         }
       });
-	  },
+    },
   },
   data() {
     return {
