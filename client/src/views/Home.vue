@@ -118,64 +118,38 @@ export default {
       this.resume.experiences[id].title = title; 
       this.resume.experiences[id].period = period; 
       this.resume.experiences[id].description = description;
-      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true)
+      Api.saveResumeSession(this.resume, this.idResume)
       .then(res => {
-        if(res.status == 500) {
+        if(res.status != 200) {
           this.$toast.open({
-            message: "Internal Server Error: index in session CV list not found",
+            message: res.data,
             type: "error",
             duration: 5000,
             dismissible: true
           });
-        } else if(res.status == 403){
-          this.$toast.open({
-            message: "Forbidden: Not a CV of User",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
+        } else {
+          this.isModified = true;
+        }
+      });
   },
 
     async updateFormation(name, period, description, id) {
       this.resume.formations[id].name = name; 
       this.resume.formations[id].period = period; 
       this.resume.formations[id].description = description;
-      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true)
+      Api.saveResumeSession(this.resume, this.idResume)
       .then(res => {
-        if(res.status == 500) {
+        if(res.status != 200) {
           this.$toast.open({
-            message: "Internal Server Error: index in session CV list not found",
+            message: res.data,
             type: "error",
             duration: 5000,
             dismissible: true
           });
-        } else if(res.status == 403){
-          this.$toast.open({
-            message: "Forbidden: Not a CV of User",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
+        } else {
+          this.isModified = true;
+        }
+      });
     },
 
     async saveResumeBDD() {
@@ -205,31 +179,20 @@ export default {
         period: period,
         description: description
       });
-      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true).then(res => {
-        if(res.status == 500) {
-          this.$toast.open({
-            message: "Internal Server Error: index in session CV list not found",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        } else if(res.status == 403){
-          this.$toast.open({
-            message: "Forbidden: Not a CV of User",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
+      Api.saveResumeSession(this.resume, this.idResume)
+      .then((res) => {
+          if(res.status != 200) {
+            this.$toast.open({
+              message: res.data,
+              type: "error",
+              duration: 5000,
+              dismissible: true
+            });
+          } else {
+            this.isModified = true;
+          }
+        }
+      );
 
     },
 
@@ -239,88 +202,52 @@ export default {
         period: period,
         description: description
       });
-      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true).then(res => {
-        if(res.status == 500) {
+      Api.saveResumeSession(this.resume, this.idResume)
+      .then(res => {
+        if(res.status != 200) {
           this.$toast.open({
-            message: "Internal Server Error: index in session CV list not found",
+            message: res.data,
             type: "error",
             duration: 5000,
             dismissible: true
           });
-        } else if(res.status == 403){
-          this.$toast.open({
-            message: "Forbidden: Not a CV of User",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
+        } else {
+          this.isModified = true;
+        }
+      });
     },
 
     async deleteExperience(index) {
       this.resume.experiences.splice(index, 1);
-      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true).then(res => {
-        if(res.status == 500) {
-          this.$toast.open({
-            message: "Internal Server Error: index in session CV list not found",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        } else if(res.status == 403){
-          this.$toast.open({
-            message: "Forbidden: Not a CV of User",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
+      Api.saveResumeSession(this.resume, this.idResume)
+      .then(res => {
+        if(res.status != 200) {
+            this.$toast.open({
+              message: res.data,
+              type: "error",
+              duration: 5000,
+              dismissible: true
+            });
+        } else {
+          this.isModified = true;
+        }
+      });
     },
 
     async deleteFormation(index) {
       this.resume.formations.splice(index, 1);
-      Api.saveResumeSession(this.resume, this.idResume).then(() => this.isModified = true).then(res => {
-        if(res.status == 500) {
+      Api.saveResumeSession(this.resume, this.idResume).then(res => {
+        if(res.status != 200) {
           this.$toast.open({
-            message: "Internal Server Error: index in session CV list not found",
+            message: res.data,
             type: "error",
             duration: 5000,
             dismissible: true
           });
-        } else if(res.status == 403){
-          this.$toast.open({
-            message: "Forbidden: Not a CV of User",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
+        } else {
+          this.isModified = true
+        }
       }
-    }
     );
     },
 
@@ -351,81 +278,14 @@ export default {
   mounted() {
     Api.getUser()
 		.then(res => {
-		if(res.response.status == 401) {
-      this.$router.push({ name: 'Login'});
-      }else if(res.status == 401 ) {
-          this.$toast.open({
-            message: "Unauthorized",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-          this.$router.push({ name: 'Login'});
-        } else if(res.status == 500 ){
-          this.$toast.open({
-            message: "Error, serveur !",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }
+      if(res.status == 401) {
+        this.$router.push({ name: 'Login'});
+      }
+      this.idResume = this.$route.params.id;
+      Api.fetchCVById(this.idResume).then(res => this.resume = res)
+      Api.fetchUserInfos().then(res => this.user = res)
+      Api.fetchCvStatus(this.idResume).then(res => this.isModified = (res.status == 200))
     });
-    this.idResume = this.$route.params.id;
-    Api.fetchCVById(this.idResume).then(res => this.resume = res)
-    .then(res => {
-      if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    });
-    Api.fetchUserInfos().then(res => this.user = res).then(res => {
-        if(res.status == 500) {
-          this.$toast.open({
-            message: "Internal Server Error",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        } else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
-    Api.fetchCvStatus(this.idResume).then(res => this.isModified = (res.status == 200))
-    .then(res => {
-        if(res.status == 500) {
-          this.$toast.open({
-            message: "Internal Server Error",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        } else if(res.status == 207){
-          this.$toast.open({
-            message: "Not modification found",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }else if(res.status == 401){
-          this.$toast.open({
-            message: "Unauthorized: Please log in",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-      }
-    }
-    );
   },
 
 }

@@ -86,21 +86,6 @@ export default {
       .then(res => {
         if(res.status == 200) {
           this.$router.push({ name: 'Dashboard'});
-        } else if(res.status == 401 ) {
-          this.$toast.open({
-            message: "Unauthorized",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-          this.$router.push({ name: 'Login'});
-        } else if(res.status == 500 ){
-          this.$toast.open({
-            message: "Error, serveur !",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
         }
       });
 	}

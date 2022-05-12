@@ -15,7 +15,7 @@ module.exports = class Api{
                 withCredentials: true
             })
             .then(res => resolve(res))
-            .catch(err => resolve(err));
+            .catch(err => resolve(err.response));
         });
     }
 
@@ -29,7 +29,7 @@ module.exports = class Api{
                 },
             })
             .then(res => resolve(res))
-            .catch(err => resolve(err));
+            .catch(err => resolve(err.response));
         });
     }
 
@@ -43,7 +43,7 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(res => resolve(res))
-            .catch(err => resolve(err));
+            .catch(err => resolve(err.response));
         });
     }
 
@@ -57,21 +57,21 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
+            .catch(err => resolve(err.response));
         });
     }
     
     static async logout(){
         return new Promise(function(resolve){
-					axios.get("http://localhost:3000/api/logout", {
-                        headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json;charset=UTF-8",
-                        },
-                        withCredentials: true 
-                    })
-					.then(res => resolve(res))
-                    .catch(err => console.log(`Cannot reach server : ${err}`));
+            axios.get("http://localhost:3000/api/logout", {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res))
+            .catch(err => resolve(res.response));
         });
     }
 
@@ -85,7 +85,7 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(cvs => resolve(cvs))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
+            .catch(err => resolve(err.response));
         });
     }
 
@@ -100,7 +100,7 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(res => resolve(res))
-            .catch(err => resolve(err));
+            .catch(err => resolve(err.response));
         });
     }
 
@@ -115,7 +115,7 @@ module.exports = class Api{
                   withCredentials: true
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
+            .catch(err => resolve(res.response));
         });
     }
     
@@ -187,7 +187,7 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
+            .catch(err => resolve(err.response));
         });
     }
     
@@ -201,7 +201,7 @@ module.exports = class Api{
                   withCredentials: true
             })
             .then(res => resolve(res))
-            .catch(err => resolve(err))
+            .catch(err => resolve(err.response))
         });
     }
 }

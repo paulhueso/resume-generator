@@ -107,6 +107,7 @@ export default {
 
 			Api.createCV(this.titleInput)
 			.then(res => {
+				console.log(res)
 				if(res.status == 201) {
 					this.cvs.push(res.data)
 					this.$toast.open({
@@ -148,6 +149,7 @@ export default {
 						duration: 5000,
 						dismissible: true
 					});
+					this.cvs.splice(index, 1);
 				} else if(res.status == 401) {
 					this.$toast.open({
 						message: "Error, Unauthorized !",
@@ -164,31 +166,30 @@ export default {
 					});
 				}
 			});
-			this.cvs.splice(index, 1);
 		}
 	},
 	mounted(){
 		Api.getUser()
 		.then(res => {
-		console.log(res);
-		if(res.response.status == 401) {
-			this.$router.push({ name: 'Login'});
-		} else if(res.status == 401 ) {
-          this.$toast.open({
-            message: "Unauthorized",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-          this.$router.push({ name: 'Login'});
-        } else if(res.status == 500 ){
-          this.$toast.open({
-            message: "Error, serveur !",
-            type: "error",
-            duration: 5000,
-            dismissible: true
-          });
-        }
+			console.log(res);
+			if(res.response.status == 401) {
+				this.$router.push({ name: 'Login'});
+			} else if(res.status == 401 ) {
+				this.$toast.open({
+					message: "Unauthorized",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
+				this.$router.push({ name: 'Login'});
+			} else if(res.status == 500 ){
+				this.$toast.open({
+					message: "Error, serveur !",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
+			}
 		});
 
 		Api.fetchCVs().then(cvs => this.cvs = cvs.data)
