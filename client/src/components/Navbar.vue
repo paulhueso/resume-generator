@@ -14,7 +14,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ms-auto nav-right">
         <div v-if="isHomePage">
-          <b-button variant="secondary" @click="generatePDF()" class="navbtn">Generate PDF</b-button>
+          <b-button variant="secondary" @click="generatePDF()" class="navbtn">Download</b-button>
+          <b-button v-if="isModified" variant="danger" @click="restoreResume()" class="navbtn">Restore resume</b-button>
           <b-button v-b-toggle.sidebar-1 variant="primary" class="navbtn">Edit resume</b-button>
           <b-button variant="success" class="navbtn" @click="saveResume()">Save</b-button>
         </div>
@@ -34,21 +35,24 @@ export default {
     Logout: async function () {
       Api.logout()
       .then(res => {
-        console.log(res);
-      if(res.status == 200) {
-        this.$router.push({ name: 'Login'});
-      } 
-    });
-  },
+        if(res.status == 200) {
+          this.$router.push({ name: 'Login'});
+        } 
+      });
+    },
     saveResume() {
       this.$emit('saveResume')
     },
     generatePDF() {
       this.$emit('generatePDF')
+    },
+    restoreResume() {
+      this.$emit('restoreResume');
     }
   },
   props: [
     'isHomePage',
+    'isModified'
   ]
 
 }

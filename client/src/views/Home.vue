@@ -1,7 +1,12 @@
 <template>
 <div>
   <header>
-    <Navbar id="navbar" @saveResume="saveResumeBDD" :isHomePage="true" @generatePDF="generateReport" />
+    <Navbar 
+      id="navbar" 
+      :isHomePage="true"
+      :isModified="isModified" 
+      @saveResume="saveResumeBDD" 
+      @generatePDF="generateReport"  />
   </header>
 
   <body>
@@ -99,20 +104,21 @@ export default {
       idResume: '',
       user: {},
       resume:{},
+      isModified: false
     };
   },
   methods: {
     generateReport () {
       this.$refs.html2Pdf.generatePdf()
     },
-    updateExperience(title, period, description, id) {
+    async updateExperience(title, period, description, id) {
       this.resume.experiences[id].title = title; 
       this.resume.experiences[id].period = period; 
       this.resume.experiences[id].description = description;
       Api.saveResumeSession(this.resume, this.idResume);
     },
 
-    updateFormation(name, period, description, id) {
+    async updateFormation(name, period, description, id) {
       this.resume.formations[id].name = name; 
       this.resume.formations[id].period = period; 
       this.resume.formations[id].description = description;
@@ -140,7 +146,7 @@ export default {
       });
     },
 
-    createNewExperience(title, period, description) {
+    async createNewExperience(title, period, description) {
       this.resume.experiences.push({
         title: title,
         period: period,
@@ -158,14 +164,21 @@ export default {
       Api.saveResumeSession(this.resume, this.idResume);
     },
 
-    deleteExperience(index) {
+    async deleteExperience(index) {
       this.resume.experiences.splice(index, 1);
       Api.saveResumeSession(this.resume, this.idResume);
     },
 
-    deleteFormation(index) {
+    async deleteFormation(index) {
       this.resume.formations.splice(index, 1);
       Api.saveResumeSession(this.resume, this.idResume);
+    },
+
+    async restoreResume() {
+      // Api.fetchCVById(this.idResume).then(res => {
+      //   this.resume = res;
+      //   this.isModified = false;
+      // });
     }
   },
 
