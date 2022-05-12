@@ -203,6 +203,13 @@ export default {
 
 
   mounted() {
+    Api.getUser()
+		.then(res => {
+		console.log(res);
+		if(res.response.status == 401) {
+      this.$router.push({ name: 'Login'});
+      }
+    });
     this.idResume = this.$route.params.id;
     Api.fetchCVById(this.idResume).then(res => this.resume = res);
     Api.fetchUserInfos().then(res => this.user = res);

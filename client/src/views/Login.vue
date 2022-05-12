@@ -63,6 +63,17 @@ export default {
 			}
 		});
 	},
+	},
+
+	mounted()
+    {
+    Api.getUser()
+	.then(res => {
+	console.log(res);
+	if(res.response.status == 200) {
+		this.$router.push({ name: 'Dashboard'});
+		}
+	});
 	}
 }
 

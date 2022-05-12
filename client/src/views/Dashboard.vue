@@ -154,6 +154,13 @@ export default {
 		}
 	},
 	mounted(){
+		Api.getUser()
+		.then(res => {
+		console.log(res);
+		if(res.response.status == 401) {
+			this.$router.push({ name: 'Login'});
+			}
+		});
 		Api.fetchCVs().then(cvs => this.cvs = cvs.data)
 	}
 }
