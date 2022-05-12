@@ -29,7 +29,7 @@ module.exports = class Api{
                 },
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
+            .catch(err => resolve(err));
         });
     }
 

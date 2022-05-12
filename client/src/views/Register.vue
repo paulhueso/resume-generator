@@ -52,15 +52,33 @@ export default {
     registerUser: function (mailInput, passwordInput, nameInput, firstnameInput) {
       Api.register(mailInput, passwordInput, nameInput, firstnameInput)
       .then(res => {
-      console.log(res);
-      if(res.status == 200) {
-        this.$router.push({ name: 'Login'});
-        console.log("Granted")
-      } else {
-        console.log("Unauthorized");
-      }
+        if(res.status == 200) {
+          this.$toast.open({
+            message: "Account created !",
+            type: "success",
+            duration: 5000,
+            dismissible: true
+          });
+          this.$router.push({ name: 'Login'});
+        } else {
+          this.$toast.open({
+            message: "Error, mail already exist !",
+            type: "error",
+            duration: 5000,
+            dismissible: true
+          });
+        }
       });
-	},
+	  },
+  },
+  data() {
+    return {
+      cvs: {},
+      mailInput: '',	
+      nameInput: '',
+      passwordInput: '',
+      firstnameInput: ''
+	  };
   }
 }
 
