@@ -100,7 +100,7 @@ module.exports = class CvService{
             if(index != -1){
                const cv = await Cv.findOne({_id:id});
                if(cv){
-                    const index2 = -1;
+                    let index2 = -1;
                     for(var i = 0; i < req.session.cv_list.length;i++){
                         if(req.session.cv_list[i]._id == id) index2 = i;
                     }
