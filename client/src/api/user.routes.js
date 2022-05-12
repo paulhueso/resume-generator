@@ -91,17 +91,16 @@ module.exports = class Api{
 
     static async createCV(titleCV){
         return new Promise(function(resolve){
-            let data = {title: titleCV};
-            axios.get("http://localhost:3000/api/user/cv", data, {
+            let data = { title: titleCV };
+            axios.post("http://localhost:3000/api/user/cv", data, {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                 },
                 withCredentials: true 
-
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));
+            .catch(err => resolve(err));
         });
     }
 
@@ -144,9 +143,7 @@ module.exports = class Api{
                 },
                 withCredentials: true 
             })
-            .then(res => {
-                resolve(res.data)
-            })
+            .then(res => resolve(res.data))
             .catch(err => console.log(`Cannot reach server : ${err}`));;
         });
     }
@@ -161,7 +158,7 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));;
+            .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
 
@@ -175,7 +172,22 @@ module.exports = class Api{
                 withCredentials: true 
             })
             .then(res => resolve(res))
-            .catch(err => console.log(`Cannot reach server : ${err}`));;
+            .catch(err => console.log(`Cannot reach server : ${err}`));
+
+        });
+    }
+
+    static async deleteCV(id) {
+        return new Promise(function(resolve) {
+            axios.delete(`http://localhost:3000/api/user/cv/${id}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
+                },
+                withCredentials: true 
+            })
+            .then(res => resolve(res))
+            .catch(err => console.log(`Cannot reach server : ${err}`));
         });
     }
 }

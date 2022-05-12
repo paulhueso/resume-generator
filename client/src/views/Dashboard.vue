@@ -4,13 +4,13 @@
 	<Navbar id="navbar" :isHomePage="false" />
 </header> 
 <b-card-group deck class="cards">
-	<b-card v-for="cv in cvs" :key="cv.title" class="card" align="center">
+	<b-card v-for="(cv, index) in cvs" :key="cv.title" class="card" align="center">
 		<b-card-text class="addBtn">
 			<br /><p style="font-size: 40px">{{ cv.title }}</p>
 		</b-card-text>
 		<template #footer>
 			<button type="button" class="btn btn-primary" @click="$router.push({ name: 'Home', params: {id:cv._id} })">Edit CV</button>
-			<button type="button" class="btn btn-danger">Delete CV</button>
+			<button type="button" class="btn btn-danger" @click="deleteResume(index)">Delete CV</button>
       	</template>
 	</b-card>
 	<b-card
@@ -71,45 +71,86 @@ export default {
 
 	components: {
 		Navbar,
-		},
+	},
 	
 	data() {
-    return {
-		cvs: {},
-		titleInput: '',	
-		titleState: null,
-		description: ''	
-	};
-},
+		return {
+			cvs: {},
+			titleInput: '',	
+			titleState: null,
+			description: ''	
+		};
+	},
 	methods: {
+
 		checkFormValidity() {
 			const valid = this.$refs.form.checkValidity()
 			this.titleState = valid
 			return valid;
 		},
+
 		resetModal() {
 			this.titleInput = ''
 			this.description = ''
 			this.titleState = null
 		},
+
 		handleOk(bvModalEvent) {
 			// Prevent modal from closing
 			bvModalEvent.preventDefault()
 			// Trigger submit handler
 			this.handleSubmit()
 		},
+
 		async handleSubmit() {
 			if(!this.checkFormValidity()) return
 
-			this.cvs.push({
-				title: this.titleInput,
+			Api.createCV(this.titleInput)
+			.then(res => {
+				if(res.status == 201) {
+					this.cvs.push(res.data)
+					this.$toast.open({
+						message: "Resume created",
+						type: "success",
+						duration: 5000,
+						dismissible: true
+					});
+				} else {
+					this.$toast.open({
+						message: "Error, could not be created !",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}
 			});
-			Api.createCV(this.titleInput);
 			
 			// Hide the modal manually
 			this.$nextTick(() => {
 				this.$refs['modal'].hide()
 			})
+		},
+
+		deleteResume(index) {
+			Api.deleteCV(this.cvs[index]._id)
+			.then(res => {
+				if(res.status == 200) {
+					this.$toast.open({
+						message: "Resume deleted",
+						type: "success",
+						duration: 5000,
+						dismissible: true
+					});
+				} else {
+					this.$toast.open({
+						message: "Error, could not be deleted !",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}
+			});
+			this.cvs.splice(index, 1);
 		}
 	},
 	mounted(){
