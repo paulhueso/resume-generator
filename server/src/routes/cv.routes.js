@@ -18,7 +18,10 @@ router.patch('/api/cv/:id',CvController.apiPatchCVById);
 /* SAVE CHANGED CVS STORED IN SESSION IN BDD */
 router.get('/api/cvs/save',CvController.apiSaveCVs);
 
-/* TEST CREATION CV */
-router.get('/api/user/cv', CvController.apiCreateCV);
+/* CREATION CV */
+router.post('/api/user/cv', CvController.apiCreateCV);
+
+/* DELETE CV */
+router.delete('/api/user/cv/:id',CvController.apiDeleteCV)
 
 module.exports = router;
