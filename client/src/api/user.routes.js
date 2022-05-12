@@ -198,6 +198,7 @@ module.exports = class Api{
                     Accept: "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
                   },
+                  withCredentials: true
             })
             .then(res => resolve(res))
             .catch(err => resolve(err))
