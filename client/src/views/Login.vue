@@ -49,31 +49,45 @@ export default {
 		this.$router.push({name: 'Register'});
 	},
 	goToMain: function (mailInput, passwordInput) {
-		Api.login(mailInput, passwordInput)
-		.then(res => {
-			if(res.status == 200) {
-				this.$router.push({ name: 'Dashboard'});
-			} else {
-				this.$toast.open({
-					message: "Error, wrong credentials",
-					type: "error",
-					duration: 5000,
-					dismissible: true
-				});
-			}
-		});
+		if(mailInput && passwordInput){
+			Api.login(mailInput, passwordInput)
+			.then(res => {
+				if(res.status == 200) {
+					this.$router.push({ name: 'Dashboard'});
+				} else if(res.status == 401){
+					this.$toast.open({
+						message: "Error, wrong credentials",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				} else {
+					this.$toast.open({
+						message: "Error, serveur",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}
+			});
+		} else {
+			this.$toast.open({
+				message: "Please enter valid credentials",
+				type: "error",
+				duration: 5000,
+				dismissible: true
+			});
+		}
 	},
 	},
 
-	mounted()
-    {
-    Api.getUser()
-	.then(res => {
-	console.log(res);
-	if(res.status == 200) {
-		this.$router.push({ name: 'Dashboard'});
-		}
-	});
+	mounted() {
+		Api.getUser()
+		.then(res => {
+			if(res.status == 200) {
+				this.$router.push({ name: 'Dashboard'});
+			}
+		});
 	}
 }
 

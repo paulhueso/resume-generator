@@ -107,6 +107,7 @@ export default {
 
 			Api.createCV(this.titleInput)
 			.then(res => {
+				console.log(res)
 				if(res.status == 201) {
 					this.cvs.push(res.data)
 					this.$toast.open({
@@ -115,9 +116,16 @@ export default {
 						duration: 5000,
 						dismissible: true
 					});
-				} else {
+				} else if(res.status == 401) {
 					this.$toast.open({
-						message: "Error, could not be created !",
+						message: "Error, Unauthorized !",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}else if(res.status == 500) {
+					this.$toast.open({
+						message: "Internal Server Error",
 						type: "error",
 						duration: 5000,
 						dismissible: true
@@ -141,27 +149,67 @@ export default {
 						duration: 5000,
 						dismissible: true
 					});
-				} else {
+					this.cvs.splice(index, 1);
+				} else if(res.status == 401) {
 					this.$toast.open({
-						message: "Error, could not be deleted !",
+						message: "Error, Unauthorized !",
+						type: "error",
+						duration: 5000,
+						dismissible: true
+					});
+				}else if(res.status == 500) {
+					this.$toast.open({
+						message: "Internal Server Error",
 						type: "error",
 						duration: 5000,
 						dismissible: true
 					});
 				}
 			});
-			this.cvs.splice(index, 1);
 		}
 	},
 	mounted(){
 		Api.getUser()
 		.then(res => {
-		console.log(res);
-		if(res.response.status == 401) {
-			this.$router.push({ name: 'Login'});
+			console.log(res);
+			if(res.response.status == 401) {
+				this.$router.push({ name: 'Login'});
+			} else if(res.status == 401 ) {
+				this.$toast.open({
+					message: "Unauthorized",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
+				this.$router.push({ name: 'Login'});
+			} else if(res.status == 500 ){
+				this.$toast.open({
+					message: "Error, serveur !",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
 			}
 		});
+
 		Api.fetchCVs().then(cvs => this.cvs = cvs.data)
+		.then(res => {
+			if(res.status == 401) {
+				this.$toast.open({
+					message: "Error, Unauthorized !",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+					});
+			}else if(res.status == 500) {
+				this.$toast.open({
+					message: "Internal Server Error",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+					});
+				}
+		})
 	}
 }
 </script>
