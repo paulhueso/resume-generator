@@ -112,7 +112,7 @@ module.exports = class User{
             res.status(200).json(createdUser);
          }
          else{
-            res.status(401).json("Email's already used.");
+            res.status(418).json("Email's already used.");
          }
       } catch (error) {
          res.status(500).json({error: error})

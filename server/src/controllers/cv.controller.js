@@ -7,7 +7,7 @@ module.exports = class Cv{
       try {
          const users = await CvService.getAllCVs();
          if(!users){
-            res.status(404).json("No CVs")
+            res.status(404).json("No CVs found")
          }
          res.json(users);
          } catch (error) {
@@ -42,7 +42,7 @@ module.exports = class Cv{
             }
          }
          else{
-            res.status(401).json("Unauthorized: Not a cv of the current user");
+            res.status(403).json("Forbidden: Not a cv of the current user");
          }
       }
       else{
@@ -57,7 +57,7 @@ module.exports = class Cv{
          cv_list.forEach(function(cv){
             const res = CvService.saveCVsInBDD(cv);
             if(!res){
-               res.status(500).json("Error while updating");
+               res.status(500).json("Internal Server Error: Error while updating");
                return;
             }
          });
@@ -134,7 +134,7 @@ module.exports = class Cv{
             const index = req.session.modified_cvs.indexOf(req.params.id);
             console.log(index,req.session)
             if(index != -1) {res.status(200).json("CV has been modified");}
-            else res.status(207).json("Not modification found");
+            else res.status(207).json("No modification found");
          }
          else res.status(401).json("Unauthorized: please log in");
       } 
