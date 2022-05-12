@@ -6,9 +6,6 @@
         class="mb-2"
         v-b-modal="modalName"
     >
-    <b-card-text>
-        {{ description }}
-    </b-card-text>
     </b-card>
 
     <b-modal
