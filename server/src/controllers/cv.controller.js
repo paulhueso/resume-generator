@@ -61,6 +61,7 @@ module.exports = class Cv{
                return;
             }
          });
+         req.session.modified_cvs = [];
          res.status(200).json("Save done");
       }
       else{
@@ -71,29 +72,30 @@ module.exports = class Cv{
    static async apiPatchCVById(req,res){
       if(req.session.isAuthentificated){
          const data = req.body
-         const updatedCV = {
-            '_id': data._id,
-            'title':data.title,
-            'type': data.type,
-            'experiences': data.experiences,
-            'formations': data.formations
-         }
          const id = req.params.id;
-         const user = req.session.user;
-         const found = user.cv_list.find(element => element == id);
-         let list= []
-         if (found){
+         let index = req.session.user.cv_list.indexOf(id);
+         if (index != -1){
+            index = -1;
             for(var i = 0; i < req.session.cv_list.length; i++){
-               if(req.session.cv_list[i]._id != id)list.push(req.session.cv_list[i]);
+               if(req.session.cv_list[i]._id == id) index = i;
             }
-            list.push(updatedCV);
-            req.session.cv_list = list;
-            res.status(200).json(updatedCV);
-            
+            if(index != -1){
+               const cv = req.session.cv_list[index];
+               const updatedCV = {
+                  '_id': id,
+                  'title':data.title || cv.title,
+                  'type': data.type || cv.type,
+                  'experiences': data.experiences || cv.experiences,
+                  'formations': data.formations || cv.formations
+               };
+               req.session.cv_list.splice(index,1);
+               req.session.cv_list.push(updatedCV);
+               req.session.modified_cvs.push(id);
+               res.status(200).json(updatedCV);
+            }
+            else res.status(500).json("Internal Server Error: index in session CV list not found");
          }
-         else{
-            res.status(401).json("Unauthorized: Not a cv of the current user");
-         }
+         else res.status(403).json("Forbidden: Not a CV of User");
       }
       else{
          res.status(401).json("Unauthorized: Please log in");
@@ -104,8 +106,7 @@ module.exports = class Cv{
       try {
          if(req.session.isAuthentificated){
             let user = req.session.user;
-            let cv_list = req.session.cv_list;
-            const createdCV = await CvService.createCV(req.body,user,res,cv_list);
+            const createdCV = await CvService.createCV(req.body,user,res,req.session);
          }
          else res.status(401).json("Unauthorized: please log in");
       } catch (error) {
@@ -120,6 +121,33 @@ module.exports = class Cv{
             let user = req.session.user;
             let cv_list = req.session.cv_list;
             await CvService.deleteCV(id,res,req.session);
+         }
+         else res.status(401).json("Unauthorized: please log in");
+      } catch (error) {
+         res.status(500).json({error: error})
+      }
+   }
+
+   static async apiCVStatus(req,res){
+      try {
+         if(req.session.isAuthentificated){
+            const index = req.session.modified_cvs.indexOf(req.params.id);
+            console.log(index,req.session)
+            if(index != -1) {res.status(200).json("CV has been modified");}
+            else res.status(207).json("Not modification found");
+         }
+         else res.status(401).json("Unauthorized: please log in");
+      } 
+      catch (error) {
+         res.status(500).json({error: error})
+      }
+   }
+
+   static async apiRestoreCv(req, res){
+      try {
+         if(req.session.isAuthentificated){
+            const id = req.params.id;
+            await CvService.RestoreCV(id,req,res);
          }
          else res.status(401).json("Unauthorized: please log in");
       } catch (error) {

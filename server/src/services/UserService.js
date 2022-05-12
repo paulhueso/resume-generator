@@ -13,7 +13,8 @@ module.exports = class UserService{
             if(verified){
                 session.user = user;
                 session.isAuthentificated = true;
-                session.cv_list = []
+                session.cv_list = [];
+                session.modified_cvs = [];
                 for(var i = 0; i < user.cv_list.length; i++){
                     let cv = await Cv.findOne({_id: user.cv_list[i]});
                     if(cv){
