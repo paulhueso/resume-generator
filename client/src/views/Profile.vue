@@ -104,6 +104,29 @@ export default {
 	},
 
 	mounted(){
+		Api.getUser()
+		.then(res => {
+			console.log(res);
+			if(res.status == 401) {
+				this.$router.push({ name: 'Login'});
+			} else if(res.status == 401 ) {
+				this.$toast.open({
+					message: "Unauthorized",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
+				this.$router.push({ name: 'Login'});
+			} else if(res.status == 500 ){
+				this.$toast.open({
+					message: "Error, serveur !",
+					type: "error",
+					duration: 5000,
+					dismissible: true
+				});
+			}
+		});
+		
 		Api.fetchUserInfos().then(user => {
 			this.user = user
 			this.tel = user.tel;
@@ -111,7 +134,7 @@ export default {
 			this.firstnameInput = user.firstname;
 			this.nameInput = user.surname;
 			this.mailInput = user.mail;
-		});		
+		});
 	}
 };
 

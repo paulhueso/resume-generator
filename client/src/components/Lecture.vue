@@ -29,7 +29,7 @@
             <b>{{exp.title}}</b>
           </p>
           <p class="page_2_miss">
-            {{ exp.period }} | {{ user.current_organization }}
+            {{ exp.period }}
           </p>
           <p class="page_2_descp"><b>Description :</b></p>
           <p class="page_2_desc">{{ exp.description }}</p>

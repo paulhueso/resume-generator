@@ -47,17 +47,6 @@
 		></b-form-input>
 	</b-form-group>
 
-
-	<b-form-group
-		label="Description"
-		label-for="description"
-	>
-		<b-form-textarea
-			id="description"
-			v-model="description"
-			rows="8"
-		></b-form-textarea>
-	</b-form-group>
 	</form>
 </b-modal>
 </div>
@@ -172,7 +161,7 @@ export default {
 		Api.getUser()
 		.then(res => {
 			console.log(res);
-			if(res.response.status == 401) {
+			if(res.status == 401) {
 				this.$router.push({ name: 'Login'});
 			} else if(res.status == 401 ) {
 				this.$toast.open({
