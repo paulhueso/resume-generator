@@ -1,6 +1,6 @@
 # resume-generator
 
-## Project setup
+## 1. Project setup
 
 In server folder:
 ```
@@ -10,9 +10,24 @@ In client folder:
 ```
 npm install 
 ```
-Run mongodb
+### Run mongodb
 
-## Project launch
+## (optional) To create example data
+
+In bin folder, run create_db.js
+
+Example run command:
+
+```
+mongo create_db.js
+```
+### Example account
+
+email : paul.hueso@gmail.com
+
+Password: 123456
+
+## 2. Project launch
 
 In server folder:
 
@@ -25,10 +40,20 @@ In client folder:
 npm run serve
 ```
 
-## Use
+## 3. Use
 Go to url:
 
 ```
 http://localhost:8080/
 ```
 
+## Miscellaneous
+
+API URL:
+```
+http://localhost:3000/
+```
+
+To test the API:
+
+See the postman export attached to the email
